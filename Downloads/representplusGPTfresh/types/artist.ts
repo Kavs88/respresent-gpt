@@ -21,5 +21,6 @@ export interface Artist {
     Website?: string;
     Instagram?: string;
     Twitter?: string;
+    FeaturedArticle?: string;
   };
 } 

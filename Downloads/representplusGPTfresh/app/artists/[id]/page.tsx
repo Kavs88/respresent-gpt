@@ -6,6 +6,7 @@ import { getArtistById } from '../../../lib/airtable';
 import { ArtistContactButtons, ArtworkCarousel } from '@/components/artists';
 import { Artist } from '@/types/artist';
 import PlatformContactButtons from "../../../components/ui/PlatformContactButtons";
+import ReactMarkdown from 'react-markdown';
 
 interface ArtistPageProps {
   params: {
@@ -29,65 +30,73 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
 
   return (
     <main style={themeStyles} className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
-      <div className="container mx-auto py-20 px-4">
-        <Link href="/artists" className="inline-flex items-center text-[var(--primary-color)] hover:underline transition-colors mb-8 transition-all duration-300 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary/50">
-          ← Back to Artists
-        </Link>
-        
-        <div className="max-w-6xl mx-auto space-y-12">
-          {/* Artist Header */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Artist Image */}
-            <div className="lg:col-span-1">
-              <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-muted/20">
-                {artist.fields.ProfileImage?.[0]?.url ? (
-                  <Image
-                    src={artist.fields.ProfileImage[0].url}
-                    alt={artist.fields.Name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    style={{ objectFit: 'cover' }}
-                    className="rounded-lg"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <span className="text-muted text-lg">No Image Available</span>
-                  </div>
-                )}
-              </div>
-            </div>
+      {/* Banner */}
+      <section className="relative w-full h-64 md:h-96">
+        {artist.fields.GeneratedBannerImage ? (
+          <Image
+            src={artist.fields.GeneratedBannerImage}
+            alt={artist.fields.Name + ' banner'}
+            fill
+            className="object-cover object-center"
+            priority
+          />
+        ) : (
+          <div className="absolute inset-0 bg-muted/30" />
+        )}
+      </section>
 
-            {/* Artist Info */}
-            <div className="lg:col-span-2 space-y-6">
-              <div>
-                <h1 className="text-5xl font-bold font-serif mb-4 text-[var(--primary-color)]">
-                  {artist.fields.Name}
-                </h1>
-                <p className="text-2xl text-muted">{artist.fields.Specialty}</p>
+      {/* Hero Layout */}
+      <section className="container mx-auto px-4 pt-12 pb-8 max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        {/* Profile Image */}
+        <div className="flex justify-center md:justify-end">
+          <div
+            className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 shadow-xl bg-background"
+            style={{ borderColor: artist.fields.ThemePrimaryColor || 'var(--primary)' }}
+          >
+            {artist.fields.ProfileImage?.[0]?.url ? (
+              <Image
+                src={artist.fields.ProfileImage[0].url}
+                alt={artist.fields.Name}
+                fill
+                className="object-cover object-top rounded-full"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <span className="text-muted text-xs">No Image</span>
               </div>
-
-              <div>
-                <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary-color)' }}>About</h2>
-                <p className="leading-relaxed text-lg">
-                  {artist.fields.Bio}
-                </p>
-              </div>
-
-              <div>
-                <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary-color)' }}>Contact</h2>
-                <PlatformContactButtons artistName={artist.fields.Name} />
-              </div>
-            </div>
+            )}
           </div>
-
-          {/* Artwork Gallery */}
-          {artist.fields.Artwork && artist.fields.Artwork.length > 0 && (
-            <div className="space-y-8">
-              <ArtworkCarousel artworks={artist.fields.Artwork} />
-            </div>
-          )}
         </div>
-      </div>
+        {/* Name, Specialty, Contact */}
+        <div className="md:col-span-2 flex flex-col gap-4 md:gap-6">
+          <h1 className="text-4xl md:text-5xl font-bold font-serif text-[var(--primary-color)]">
+            {artist.fields.Name}
+          </h1>
+          <h2 className="text-xl md:text-2xl text-muted mb-2">{artist.fields.Specialty}</h2>
+          <PlatformContactButtons artistName={artist.fields.Name} />
+        </div>
+      </section>
+
+      {/* Featured Article */}
+      {artist.fields.FeaturedArticle && (
+        <section className="container mx-auto px-4 max-w-3xl py-8">
+          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary-color)' }}>Featured Article</h2>
+          <article className="prose prose-invert prose-lg max-w-none">
+            <ReactMarkdown>{artist.fields.FeaturedArticle}</ReactMarkdown>
+          </article>
+        </section>
+      )}
+
+      {/* Artwork Gallery */}
+      <section className="container mx-auto px-4 max-w-6xl py-12">
+        <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--primary-color)' }}>Artwork Gallery</h2>
+        {artist.fields.Artwork && artist.fields.Artwork.length > 0 ? (
+          <ArtworkCarousel artworks={artist.fields.Artwork} themeColor={artist.fields.ThemePrimaryColor} />
+        ) : (
+          <p className="text-muted">No artwork available.</p>
+        )}
+      </section>
     </main>
   );
 } 

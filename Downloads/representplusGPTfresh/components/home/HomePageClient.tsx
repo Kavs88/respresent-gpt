@@ -108,14 +108,35 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
             {featuredArtists.map((artist) => (
               <RevealOnScroll key={artist.id} delay={0.1}>
                 <div className="bg-black/10 p-4 rounded-lg">
-                  <ArtistCard artist={artist} />
+                  <ArtistCard artist={artist} themeColor={artist.fields.ThemePrimaryColor} />
                 </div>
               </RevealOnScroll>
             ))}
           </div>
         </div>
       </section>
-      {/* You can add back the Testimonials and Footer sections here later */}
+
+      {/* === Call to Action Section === */}
+      <section className="py-20 bg-background text-center">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to connect with exceptional talent?</h2>
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Browse our full roster or reach out to Represent+ for bespoke artist recommendations and collaborations.
+          </p>
+          <div className="flex flex-col md:flex-row gap-6 justify-center">
+            <Link href="/artists">
+              <MagneticButton className="bg-primary text-black font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-transform transition-all duration-300 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary/50">
+                View All Artists
+              </MagneticButton>
+            </Link>
+            <Link href="/contact">
+              <MagneticButton className="bg-black text-primary border border-primary font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-transform transition-all duration-300 hover:bg-primary hover:text-black focus:outline-none focus:ring-2 focus:ring-primary/50">
+                Contact the Agency
+              </MagneticButton>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 } 

@@ -6,7 +6,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Attachment } from '@/types/artist';
 
-export function ArtworkCarousel({ artworks }: { artworks: Attachment[] }) {
+export function ArtworkCarousel({ artworks, themeColor }: { artworks: Attachment[]; themeColor?: string }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -37,14 +37,15 @@ export function ArtworkCarousel({ artworks }: { artworks: Attachment[] }) {
           <div className="flex">
             {artworks.map((artwork, idx) => (
               <div
-                className="min-w-0 flex-[0_0_100%] relative aspect-[4/3]"
+                className="min-w-0 flex-[0_0_100%] relative aspect-[4/3] flex items-center justify-center p-2"
                 key={artwork.id || artwork.url || idx}
+                style={{ backgroundColor: themeColor || 'var(--border)' }}
               >
                 <Image
                   src={artwork.url}
                   alt={artwork.filename || ''}
                   fill
-                  className="object-cover rounded-2xl"
+                  className="object-cover rounded-md"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
                   priority={idx === 0}
                 />
