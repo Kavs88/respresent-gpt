@@ -5,6 +5,7 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { GlobalMotionWrapper } from '@/components/ui/GlobalMotionWrapper'
+import PageTransitionWrapper from '@/components/layout/PageTransitionWrapper'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
@@ -23,9 +24,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${lora.variable}`}>
       <body className="bg-background font-sans text-foreground flex flex-col min-h-screen">
         <Header />
-        <GlobalMotionWrapper>
+        <PageTransitionWrapper>
           <main className="flex-grow">{children}</main>
-        </GlobalMotionWrapper>
+        </PageTransitionWrapper>
         <Footer />
       </body>
     </html>

@@ -56,12 +56,14 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
         </div>
 
         <div className="relative z-10">
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-4">
-            <AnimatedText text="DISCOVER" className="block text-white" />
-            <AnimatedText text="EXCEPTIONAL" className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400" delay={0.3} />
-            <AnimatedText text="TALENT" className="block text-white" delay={0.6} />
-          </h1>
-          <RevealOnScroll delay={1.2}>
+          <RevealOnScroll delay={0}>
+            <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-4">
+              <AnimatedText text="DISCOVER" className="block text-white" />
+              <AnimatedText text="EXCEPTIONAL" className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400" delay={0.3} />
+              <AnimatedText text="TALENT" className="block text-white" delay={0.6} />
+            </h1>
+          </RevealOnScroll>
+          <RevealOnScroll delay={0.3}>
             <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mt-6">
               A curated platform showcasing the most innovative contemporary artists from around the world.
             </p>
@@ -80,7 +82,9 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
       {artworks.length > 0 && (
         <section className="py-32 bg-[#121212]">
           <div className="text-center mb-12">
-             <h2 className="text-4xl font-serif font-bold text-white">Featured Work</h2>
+            <RevealOnScroll delay={0.1}>
+              <h2 className="text-4xl font-serif font-bold text-white">Featured Work</h2>
+            </RevealOnScroll>
           </div>
           {/* This assumes you have a carousel component that can take the artworks array */}
           <ArtworkCarousel artworks={artworks} />
@@ -91,16 +95,22 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
       <section className="py-32 bg-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-5xl font-black text-black tracking-tight">Featured Artists</h2>
-            <p className="text-xl text-black/80 max-w-2xl mx-auto mt-4">
-              The visionaries shaping our creative landscape.
-            </p>
+            <RevealOnScroll delay={0.1}>
+              <h2 className="text-5xl font-black text-black tracking-tight">Featured Artists</h2>
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.2}>
+              <p className="text-xl text-black/80 max-w-2xl mx-auto mt-4">
+                The visionaries shaping our creative landscape.
+              </p>
+            </RevealOnScroll>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredArtists.map((artist) => (
-              <div className="bg-black/10 p-4 rounded-lg" key={artist.id}>
-                <ArtistCard artist={artist} />
-              </div>
+              <RevealOnScroll key={artist.id} delay={0.1}>
+                <div className="bg-black/10 p-4 rounded-lg">
+                  <ArtistCard artist={artist} />
+                </div>
+              </RevealOnScroll>
             ))}
           </div>
         </div>

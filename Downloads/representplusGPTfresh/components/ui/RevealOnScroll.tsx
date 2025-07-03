@@ -1,33 +1,17 @@
 'use client';
-import React, { useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-export interface RevealOnScrollProps {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-}
-
-export function RevealOnScroll({ children, className = '', delay = 0 }: RevealOnScrollProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new window.IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.15 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+export function RevealOnScroll({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
 
   return (
     <motion.div
       ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: 'easeOut', delay }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: 'easeOut' }}
     >
       {children}
     </motion.div>
