@@ -4,7 +4,7 @@ import { Artist } from "@/types/artist";
 
 export function ArtistCard({ artist }: { artist: Artist }) {
   return (
-    <Link href={`/artists/${artist.id}`} className="group block text-foreground hover:text-primary transition-colors duration-300">
+    <Link href={`/artists/${artist.id}`} className="group block text-foreground transition-colors duration-300">
       <div className="relative aspect-square w-full overflow-hidden rounded-lg bg-muted/20">
         {artist.fields.ProfileImage?.[0]?.url ? (
           <Image
@@ -21,7 +21,7 @@ export function ArtistCard({ artist }: { artist: Artist }) {
           </div>
         )}
       </div>
-      <h3 className="mt-4 text-xl font-bold font-serif">{artist.fields.Name}</h3>
+      <h3 className="mt-4 text-xl font-bold font-serif group-hover:text-primary transition-colors duration-300">{artist.fields.Name}</h3>
       <p className="text-muted text-sm">{artist.fields.Specialty}</p>
     </Link>
   );

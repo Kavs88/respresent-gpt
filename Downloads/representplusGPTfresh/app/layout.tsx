@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter, Lora } from 'next/font/google'
 import './globals.css'
 import { Logo } from '@/components/ui/Logo'
+import { GlobalMotionWrapper } from '@/components/ui/GlobalMotionWrapper'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
@@ -26,7 +27,9 @@ export default function RootLayout({
             {/* You can add nav links or actions here if needed */}
           </div>
         </header>
-        {children}
+        <GlobalMotionWrapper>
+          {children}
+        </GlobalMotionWrapper>
       </body>
     </html>
   )
