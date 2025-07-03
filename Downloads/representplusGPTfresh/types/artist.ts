@@ -1,18 +1,19 @@
+export interface Attachment {
+  url: string;
+  filename?: string;
+  id?: string;
+}
+
 export interface Artist {
   id: string;
   fields: {
     Name: string;
     Bio: string;
     Specialty: string;
-    ProfileImage?: Array<{
-      url: string;
-      filename?: string;
-    }>;
-    Artwork?: Array<{
-      url: string;
-      filename?: string;
-    }>;
+    ProfileImage?: Array<Attachment>;
+    Artwork?: Array<Attachment>;
     ThemeBgColor?: string;
+    ThemeBackgroundColor?: string;
     ThemeTextColor?: string;
     ThemePrimaryColor?: string;
     Email?: string;

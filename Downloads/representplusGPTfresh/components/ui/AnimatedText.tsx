@@ -2,15 +2,16 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface AnimatedTextProps {
-  children: React.ReactNode;
+export interface AnimatedTextProps {
+  text?: string;
+  children?: React.ReactNode;
   className?: string;
   delay?: number;
 }
 
-export function AnimatedText({ children, className = '', delay = 0 }: AnimatedTextProps) {
-  // Split text into lines, then words, then letters
-  const lines = typeof children === 'string' ? children.split('\n') : [children];
+export function AnimatedText({ text, children, className = '', delay = 0 }: AnimatedTextProps) {
+  const content = text || children;
+  const lines = typeof content === 'string' ? content.split('\n') : [content];
   return (
     <div className={className}>
       {lines.map((line, i) => (

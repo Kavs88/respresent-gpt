@@ -2,12 +2,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-interface RevealOnScrollProps {
+export interface RevealOnScrollProps {
   children: React.ReactNode;
   className?: string;
+  delay?: number;
 }
 
-export function RevealOnScroll({ children, className = '' }: RevealOnScrollProps) {
+export function RevealOnScroll({ children, className = '', delay = 0 }: RevealOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -26,7 +27,7 @@ export function RevealOnScroll({ children, className = '' }: RevealOnScrollProps
       className={className}
       initial={{ opacity: 0, y: 40 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
+      transition={{ duration: 0.7, ease: 'easeOut', delay }}
     >
       {children}
     </motion.div>

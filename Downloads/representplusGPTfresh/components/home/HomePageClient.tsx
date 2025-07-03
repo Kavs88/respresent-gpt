@@ -6,6 +6,7 @@ import { MagneticButton } from '@/components/ui/MagneticButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArtistCard } from '@/components/artists/ArtistCard';
+import { ArtworkCarousel } from '@/components/artists/ArtworkCarousel';
 
 interface Artwork {
   url: string;
@@ -53,92 +54,68 @@ export default function HomePageClient({ artworks, featuredArtists }: HomePageCl
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
-      <section className="relative flex flex-col items-center justify-center min-h-[60vh] py-24">
-        <AnimatedText className="text-center text-5xl md:text-7xl font-black font-serif tracking-tight mb-8" delay={0.2}>
-          {`DISCOVER\nEXCEPTIONAL\nTALENT`}
-        </AnimatedText>
-        <RevealOnScroll>
-          <MagneticButton href="/artists" className="mt-6">
-            View All Artists
-          </MagneticButton>
-        </RevealOnScroll>
-        {/* Subtle animated background shapes */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute left-1/2 top-1/3 w-[60vw] h-[60vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl animate-pulse" />
+    <div className="bg-[#0e0e0e] text-white font-sans overflow-x-hidden">
+      {/* === Immersive Hero Section === */}
+      <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden py-20 px-4">
+        {/* Animated background gradient shapes */}
+        <div className="absolute inset-0 z-0 opacity-20">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-primary to-green-500 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-l from-primary to-green-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        </div>
+
+        <div className="relative z-10">
+          <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-4">
+            <AnimatedText text="DISCOVER" className="block text-white" />
+            <AnimatedText text="EXCEPTIONAL" className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400" delay={0.3} />
+            <AnimatedText text="TALENT" className="block text-white" delay={0.6} />
+          </h1>
+          <RevealOnScroll delay={1.2}>
+            <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mt-6">
+              A curated platform showcasing the most innovative contemporary artists from around the world.
+            </p>
+          </RevealOnScroll>
+          <RevealOnScroll delay={1.4}>
+            <Link href="/artists" className="mt-8 inline-block">
+              <MagneticButton className="bg-primary text-black font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-transform">
+                Explore the Roster
+              </MagneticButton>
+            </Link>
+          </RevealOnScroll>
         </div>
       </section>
 
-      {/* Featured Work Carousel */}
-      <section className="relative py-20">
-        <RevealOnScroll>
-          <h2 className="text-center text-3xl md:text-5xl font-bold font-serif mb-10 text-primary">Featured Work</h2>
-        </RevealOnScroll>
-        {artworks.length > 0 && (
-          <div className="relative max-w-3xl mx-auto">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-lg bg-muted/20">
-              <Image
-                src={artworks[carouselIndex].url}
-                alt={artworks[carouselIndex].filename || `Artwork ${carouselIndex + 1}`}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
-                style={{ objectFit: 'cover' }}
-                className="rounded-2xl transition-all duration-700"
-                priority
-              />
-            </div>
-            {artworks.length > 1 && (
-              <div className="flex justify-center gap-2 mt-4">
-                {artworks.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCarouselIndex(i)}
-                    className={`w-3 h-3 rounded-full transition-all duration-200 ${i === carouselIndex ? 'bg-primary' : 'bg-muted/40'}`}
-                    aria-label={`Go to artwork ${i + 1}`}
-                  />
-                ))}
-              </div>
-            )}
+      {/* === Featured Work Carousel === */}
+      {artworks.length > 0 && (
+        <section className="py-20 bg-[#121212]">
+          <div className="text-center mb-12">
+             <h2 className="text-4xl font-serif font-bold text-white">Featured Work</h2>
           </div>
-        )}
-      </section>
+          {/* This assumes you have a carousel component that can take the artworks array */}
+          <ArtworkCarousel artworks={artworks} />
+        </section>
+      )}
 
-      {/* Featured Artists Section */}
-      <section className="py-20 bg-primary text-black">
-        <div className="container mx-auto">
-          <RevealOnScroll>
-            <h2 className="text-center text-3xl md:text-5xl font-bold font-serif mb-10">Featured Artists</h2>
-          </RevealOnScroll>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-            {featuredArtists.map((artist) => (
-              <RevealOnScroll key={artist.id}>
-                <ArtistCard artist={artist} />
-              </RevealOnScroll>
-            ))}
+      {/* === Featured Artists Section (High-Contrast Theme) === */}
+      <section className="py-20 bg-primary">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-5xl font-black text-black tracking-tight">Featured Artists</h2>
+            <p className="text-xl text-black/80 max-w-2xl mx-auto mt-4">
+              The visionaries shaping our creative landscape.
+            </p>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-background text-foreground border-t border-muted/20">
-        <div className="container mx-auto max-w-4xl">
-          <RevealOnScroll>
-            <h2 className="text-center text-3xl md:text-5xl font-bold font-serif mb-10">Testimonials</h2>
-          </RevealOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
-              <RevealOnScroll key={i}>
-                <div className="bg-muted/10 rounded-2xl p-8 shadow-lg flex flex-col items-center text-center">
-                  <p className="text-lg font-serif mb-4">“{t.quote}”</p>
-                  <div className="font-bold text-primary">{t.name}</div>
-                  <div className="text-muted text-sm">{t.role}</div>
-                </div>
-              </RevealOnScroll>
+            {featuredArtists.map((artist) => (
+              <div className="bg-black/10 p-4 rounded-lg">
+                <ArtistCard artist={artist} />
+              </div>
             ))}
           </div>
         </div>
       </section>
+      
+      {/* You can add back the Testimonials and Footer sections here later */}
+
     </div>
   );
 } 

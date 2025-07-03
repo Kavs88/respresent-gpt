@@ -2,11 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-
-interface Attachment {
-  url: string;
-  filename?: string;
-}
+import { Attachment } from '@/types/artist';
 
 interface ArtworkCarouselProps {
   artworks: Attachment[];
@@ -109,6 +105,19 @@ export function ArtworkCarousel({ artworks }: ArtworkCarouselProps) {
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+export function ArtworkCarouselPlaceholder() {
+  // A simple grid display as a placeholder for a real carousel
+  return (
+    <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 px-4">
+      {Array.from({ length: 3 }, (_, index) => (
+        <div key={index} className="relative aspect-square">
+          <Image src={''} alt={''} fill className="object-cover rounded-md" />
+        </div>
+      ))}
     </div>
   );
 } 
