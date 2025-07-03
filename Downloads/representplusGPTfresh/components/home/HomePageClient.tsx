@@ -11,6 +11,9 @@ import { ArtworkCarousel } from '@/components/artists/ArtworkCarousel';
 interface Artwork {
   url: string;
   filename?: string;
+  artistName?: string;
+  artistId?: string;
+  profileImage?: string | null;
 }
 
 interface Artist {
@@ -19,20 +22,20 @@ interface Artist {
 }
 
 interface HomePageClientProps {
-  artworks: Artwork[];
-  featuredArtists: Artist[];
+  artists: Artist[];
+  featuredArtworks: Artwork[];
 }
 
-export default function HomePageClient({ artworks, featuredArtists }: HomePageClientProps) {
+export default function HomePageClient({ artists, featuredArtworks }: HomePageClientProps) {
   // Carousel state
   const [carouselIndex, setCarouselIndex] = useState(0);
   useEffect(() => {
-    if (artworks.length < 2) return;
+    if (featuredArtworks.length < 2) return;
     const interval = setInterval(() => {
-      setCarouselIndex((i) => (i + 1) % artworks.length);
+      setCarouselIndex((i) => (i + 1) % featuredArtworks.length);
     }, 3500);
     return () => clearInterval(interval);
-  }, [artworks]);
+  }, [featuredArtworks]);
 
   // Testimonials (static for now)
   const testimonials = [
@@ -85,13 +88,13 @@ export default function HomePageClient({ artworks, featuredArtists }: HomePageCl
       </section>
 
       {/* === Featured Work Carousel === */}
-      {artworks.length > 0 && (
+      {featuredArtworks.length > 0 && (
         <section className="py-32 bg-[#121212]">
           <div className="text-center mb-12">
              <h2 className="text-4xl font-serif font-bold text-white">Featured Work</h2>
           </div>
           {/* This assumes you have a carousel component that can take the artworks array */}
-          <ArtworkCarousel artworks={artworks} />
+          <ArtworkCarousel artworks={featuredArtworks} />
         </section>
       )}
 
@@ -105,17 +108,15 @@ export default function HomePageClient({ artworks, featuredArtists }: HomePageCl
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredArtists.map((artist) => (
-              <div className="bg-black/10 p-4 rounded-lg">
+            {artists.map((artist) => (
+              <div className="bg-black/10 p-4 rounded-lg" key={artist.id}>
                 <ArtistCard artist={artist} />
               </div>
             ))}
           </div>
         </div>
       </section>
-      
       {/* You can add back the Testimonials and Footer sections here later */}
-
     </div>
   );
 } 
