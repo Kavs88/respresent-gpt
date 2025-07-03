@@ -30,3 +30,16 @@ export async function getArtists(options?: GetArtistsOptions) {
   
   return records;
 }
+
+export async function getAllTags() {
+  const artists = await getArtists();
+  const allTags = new Set<string>();
+  
+  artists.forEach((artist: any) => {
+    if (artist.fields.Tags && Array.isArray(artist.fields.Tags)) {
+      artist.fields.Tags.forEach((tag: string) => allTags.add(tag));
+    }
+  });
+  
+  return Array.from(allTags).sort();
+}
