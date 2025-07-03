@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { getArtistById } from '../../../lib/airtable';
 import { ArtistContactButtons, ArtworkCarousel } from '@/components/artists';
 import { Artist } from '@/types/artist';
+import PlatformContactButtons from "../../../components/ui/PlatformContactButtons";
 
 interface ArtistPageProps {
   params: {
@@ -74,7 +75,7 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
 
               <div>
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary-color)' }}>Contact</h2>
-                <ArtistContactButtons artist={artist} themeColor={artist.fields.ThemePrimaryColor || '#00ff9d'} />
+                <PlatformContactButtons artistName={artist.fields.Name} />
               </div>
             </div>
           </div>

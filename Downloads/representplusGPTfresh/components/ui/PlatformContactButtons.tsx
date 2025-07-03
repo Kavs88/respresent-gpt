@@ -1,42 +1,46 @@
 "use client";
+import React from "react";
 import { FaInstagram, FaEnvelope, FaTwitter, FaArtstation } from 'react-icons/fa';
 
-const contactLinks = [
-  {
-    name: 'Instagram',
-    icon: FaInstagram,
-    url: 'https://instagram.com/representplus',
-  },
-  {
-    name: 'Twitter',
-    icon: FaTwitter,
-    url: 'https://twitter.com/representplus',
-  },
-  {
-    name: 'Artstation',
-    icon: FaArtstation,
-    url: 'https://artstation.com/representplus',
-  },
-  {
-    name: 'Email',
-    icon: FaEnvelope,
-    url: 'mailto:info@representplus.com?subject=Inquiry&body=Hi, I\'d like to inquire about Represent+.',
-  },
-];
+interface PlatformContactButtonsProps {
+  artistName?: string;
+}
 
-export const PlatformContactButtons = () => (
-  <div className="flex gap-4 mt-6">
-    {contactLinks.map((link) => (
+const getMessage = (artistName?: string) =>
+  artistName
+    ? `Hi, I am contacting you regarding ${artistName}...`
+    : "Hi, I would like to inquire about Represent+....";
+
+function PlatformContactButtons({ artistName }: PlatformContactButtonsProps) {
+  const message = encodeURIComponent(getMessage(artistName));
+  return (
+    <div className="flex flex-wrap gap-3">
       <a
-        key={link.name}
-        href={link.url}
+        href={`mailto:hello@represent.plus?subject=Inquiry&body=${message}`}
+        className="px-4 py-2 rounded bg-primary text-black font-semibold hover:bg-primary/80 transition"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={link.name}
-        className="text-muted hover:text-primary transition-colors"
       >
-        <link.icon size={24} />
+        Email
       </a>
-    ))}
-  </div>
-); 
+      <a
+        href={`https://wa.me/1234567890?text=${message}`}
+        className="px-4 py-2 rounded bg-green-500 text-black font-semibold hover:bg-green-400 transition"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        WhatsApp
+      </a>
+      <a
+        href={`https://instagram.com/representplus`}
+        className="px-4 py-2 rounded bg-pink-500 text-black font-semibold hover:bg-pink-400 transition"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Instagram
+      </a>
+    </div>
+  );
+}
+
+export default PlatformContactButtons; 

@@ -2,8 +2,8 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { Inter, Lora } from 'next/font/google'
 import './globals.css'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
+import Header from "../components/layout/Header"
+import Footer from "../components/layout/Footer"
 import { GlobalMotionWrapper } from '@/components/ui/GlobalMotionWrapper'
 import PageTransitionWrapper from '@/components/layout/PageTransitionWrapper'
 
