@@ -1,5 +1,6 @@
 import { getArtists } from '@/lib/airtable';
 import dynamic from 'next/dynamic';
+import { PlatformContactButtons } from '@/components/ui/PlatformContactButtons';
 
 const HomePageClient = dynamic(() => import('@/components/home/HomePageClient'), { ssr: false });
 
