@@ -19,17 +19,17 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
     notFound();
   }
 
-  // Dynamic theming system
+  // Robust dynamic theming system with strong fallbacks
   const themeStyles = {
-    '--bg-color': artist.fields.ThemeBgColor || '#0E0E0E',
-    '--text-color': artist.fields.ThemeTextColor || '#E5E5E5',
-    '--primary-color': artist.fields.ThemePrimaryColor || '#00ff9d',
+    '--bg-color': artist.fields.ThemeBackgroundColor || '#0E0E0E', // Fallback to default dark
+    '--text-color': artist.fields.ThemeTextColor || '#E5E5E5',     // Fallback to default light text
+    '--primary-color': artist.fields.ThemePrimaryColor || '#00ff9d', // Fallback to default neon green
   } as React.CSSProperties;
 
   return (
-    <main className="min-h-screen" style={themeStyles}>
+    <main style={themeStyles} className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
       <div className="container mx-auto py-20 px-4">
-        <Link href="/artists" className="inline-flex items-center text-foreground hover:text-primary transition-colors mb-8">
+        <Link href="/artists" className="inline-flex items-center text-[var(--primary-color)] hover:underline transition-colors mb-8">
           ← Back to Artists
         </Link>
         
@@ -59,22 +59,22 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
             {/* Artist Info */}
             <div className="lg:col-span-2 space-y-6">
               <div>
-                <h1 className="text-5xl font-bold font-serif text-primary mb-4">
+                <h1 className="text-5xl font-bold font-serif mb-4 text-[var(--primary-color)]">
                   {artist.fields.Name}
                 </h1>
                 <p className="text-2xl text-muted">{artist.fields.Specialty}</p>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold mb-4 text-foreground">About</h2>
-                <p className="text-foreground/80 leading-relaxed text-lg">
+                <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary-color)' }}>About</h2>
+                <p className="leading-relaxed text-lg">
                   {artist.fields.Bio}
                 </p>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold mb-4 text-foreground">Contact</h2>
-                <ArtistContactButtons artist={artist} />
+                <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary-color)' }}>Contact</h2>
+                <ArtistContactButtons artist={artist} themeColor={artist.fields.ThemePrimaryColor || '#00ff9d'} />
               </div>
             </div>
           </div>
