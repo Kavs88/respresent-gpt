@@ -56,7 +56,7 @@ export default function HomePageClient({ artworks, featuredArtists }: HomePageCl
   return (
     <div className="bg-[#0e0e0e] text-white font-sans overflow-x-hidden">
       {/* === Immersive Hero Section === */}
-      <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden py-20 px-4">
+      <section className="relative min-h-screen flex items-center justify-center text-center overflow-hidden py-32 px-4">
         {/* Animated background gradient shapes */}
         <div className="absolute inset-0 z-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-primary to-green-500 rounded-full blur-3xl animate-pulse"></div>
@@ -76,7 +76,7 @@ export default function HomePageClient({ artworks, featuredArtists }: HomePageCl
           </RevealOnScroll>
           <RevealOnScroll delay={1.4}>
             <Link href="/artists" className="mt-8 inline-block">
-              <MagneticButton className="bg-primary text-black font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-transform">
+              <MagneticButton className="bg-primary text-black font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-transform transition-all duration-300 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary/50">
                 Explore the Roster
               </MagneticButton>
             </Link>
@@ -86,7 +86,7 @@ export default function HomePageClient({ artworks, featuredArtists }: HomePageCl
 
       {/* === Featured Work Carousel === */}
       {artworks.length > 0 && (
-        <section className="py-20 bg-[#121212]">
+        <section className="py-32 bg-[#121212]">
           <div className="text-center mb-12">
              <h2 className="text-4xl font-serif font-bold text-white">Featured Work</h2>
           </div>
@@ -96,7 +96,7 @@ export default function HomePageClient({ artworks, featuredArtists }: HomePageCl
       )}
 
       {/* === Featured Artists Section (High-Contrast Theme) === */}
-      <section className="py-20 bg-primary">
+      <section className="py-32 bg-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-5xl font-black text-black tracking-tight">Featured Artists</h2>

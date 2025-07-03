@@ -14,12 +14,12 @@ const config: Config = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      white: '#ffffff',
-      black: '#000000',
-      background: '#0E0E0E',
-      foreground: '#E5E5E5',
-      primary: '#00ff9d', // Neon Green
-      muted: '#888888',
+      background: 'rgb(var(--background) / <alpha-value>)',
+      foreground: 'rgb(var(--foreground) / <alpha-value>)',
+      primary: 'rgb(var(--primary) / <alpha-value>)',
+      muted: 'rgb(var(--muted) / <alpha-value>)',
+      card: 'rgb(var(--card) / <alpha-value>)',
+      border: 'rgb(var(--border) / <alpha-value>)',
     },
     extend: {}, // We leave extend empty for now
   },

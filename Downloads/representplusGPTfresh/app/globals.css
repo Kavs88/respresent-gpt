@@ -1,3 +1,12 @@
+:root {
+  --background: 14 14 14; /* rgb(14, 14, 14) */
+  --foreground: 229 229 229; /* rgb(229, 229, 229) */
+  --primary: 0 255 157; /* rgb(0, 255, 157) - Neon Green */
+  --muted: 136 136 136; /* rgb(136, 136, 136) */
+  --card: 20 20 20;
+  --border: 40 40 40;
+}
+
 html { cursor: none; }
 @tailwind base;
 @tailwind components;

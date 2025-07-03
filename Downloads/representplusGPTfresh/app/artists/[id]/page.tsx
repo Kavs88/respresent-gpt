@@ -29,7 +29,7 @@ export default async function ArtistPage({ params }: ArtistPageProps) {
   return (
     <main style={themeStyles} className="min-h-screen bg-[var(--bg-color)] text-[var(--text-color)]">
       <div className="container mx-auto py-20 px-4">
-        <Link href="/artists" className="inline-flex items-center text-[var(--primary-color)] hover:underline transition-colors mb-8">
+        <Link href="/artists" className="inline-flex items-center text-[var(--primary-color)] hover:underline transition-colors mb-8 transition-all duration-300 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary/50">
           ← Back to Artists
         </Link>
         

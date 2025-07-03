@@ -9,7 +9,7 @@ export default async function ArtistsPage() {
   ]);
 
   return (
-    <div className="container mx-auto py-20 px-4">
+    <div className="container mx-auto py-32 px-4">
       <div className="text-center mb-16">
         <h1 className="text-6xl font-serif font-black tracking-tight text-foreground">
           All Artists
