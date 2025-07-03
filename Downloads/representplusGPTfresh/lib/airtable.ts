@@ -43,3 +43,9 @@ export async function getAllTags() {
   
   return Array.from(allTags).sort();
 }
+
+export async function getArtistById(id: string) {
+  const artists = await getArtists();
+  const artist = artists.find((artist: any) => artist.id === id);
+  return artist || null;
+}
