@@ -1,37 +1,30 @@
-'use client';
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+"use client";
+import { motion } from 'framer-motion';
+import { ElementType } from 'react';
 
-export interface AnimatedTextProps {
-  text?: string;
-  children?: React.ReactNode;
+interface AnimatedTextProps {
+  text: string;
+  el?: ElementType;
   className?: string;
   delay?: number;
 }
 
-export function AnimatedText({ text, children, className = '', delay = 0 }: AnimatedTextProps) {
-  const content = text || children;
-  const lines = typeof content === 'string' ? content.split('\n') : [content];
+export const AnimatedText = ({ text, el: Wrapper = 'p', className = '', delay = 0 }: AnimatedTextProps) => {
+  const characters = text.split("");
   return (
-    <div className={className}>
-      {lines.map((line, i) => (
-        <div key={i} className="overflow-hidden">
-          <AnimatePresence>
-            <motion.span
-              initial={{ y: 40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                delay: delay + i * 0.2,
-                duration: 0.7,
-                ease: 'easeOut',
-              }}
-              className="inline-block"
-            >
-              {line}
-            </motion.span>
-          </AnimatePresence>
-        </div>
+    <Wrapper className={className}>
+      <span className="sr-only">{text}</span>
+      {characters.map((char: string, index: number) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: delay + index * 0.05, ease: 'easeOut' }}
+          aria-hidden
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
       ))}
-    </div>
+    </Wrapper>
   );
-} 
+}; 

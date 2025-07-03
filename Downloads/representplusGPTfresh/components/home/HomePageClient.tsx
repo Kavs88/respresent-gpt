@@ -6,36 +6,25 @@ import { MagneticButton } from '@/components/ui/MagneticButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArtistCard } from '@/components/artists/ArtistCard';
-import { ArtworkCarousel } from '@/components/artists/ArtworkCarousel';
-
-interface Artwork {
-  url: string;
-  filename?: string;
-  artistName?: string;
-  artistId?: string;
-  profileImage?: string | null;
-}
-
-interface Artist {
-  id: string;
-  fields: any;
-}
+import { ArtworkCarousel } from './ArtworkCarousel';
+import { Artist } from '@/types/artist';
+import { Attachment } from '@/types/artist';
 
 interface HomePageClientProps {
-  artists: Artist[];
-  featuredArtworks: Artwork[];
+  featuredArtists: Artist[];
+  artworks: Attachment[];
 }
 
-export default function HomePageClient({ artists, featuredArtworks }: HomePageClientProps) {
+export default function HomePageClient({ featuredArtists, artworks }: HomePageClientProps) {
   // Carousel state
   const [carouselIndex, setCarouselIndex] = useState(0);
   useEffect(() => {
-    if (featuredArtworks.length < 2) return;
+    if (artworks.length < 2) return;
     const interval = setInterval(() => {
-      setCarouselIndex((i) => (i + 1) % featuredArtworks.length);
+      setCarouselIndex((i) => (i + 1) % artworks.length);
     }, 3500);
     return () => clearInterval(interval);
-  }, [featuredArtworks]);
+  }, [artworks]);
 
   // Testimonials (static for now)
   const testimonials = [
@@ -88,13 +77,13 @@ export default function HomePageClient({ artists, featuredArtworks }: HomePageCl
       </section>
 
       {/* === Featured Work Carousel === */}
-      {featuredArtworks.length > 0 && (
+      {artworks.length > 0 && (
         <section className="py-32 bg-[#121212]">
           <div className="text-center mb-12">
              <h2 className="text-4xl font-serif font-bold text-white">Featured Work</h2>
           </div>
           {/* This assumes you have a carousel component that can take the artworks array */}
-          <ArtworkCarousel artworks={featuredArtworks} />
+          <ArtworkCarousel artworks={artworks} />
         </section>
       )}
 
@@ -108,7 +97,7 @@ export default function HomePageClient({ artists, featuredArtworks }: HomePageCl
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {artists.map((artist) => (
+            {featuredArtists.map((artist) => (
               <div className="bg-black/10 p-4 rounded-lg" key={artist.id}>
                 <ArtistCard artist={artist} />
               </div>
