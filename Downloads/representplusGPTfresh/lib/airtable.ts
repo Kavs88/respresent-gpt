@@ -5,7 +5,11 @@ const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
 const BASE_ID = process.env.AIRTABLE_BASE_ID;
 const TABLE_NAME = "Artists";
 
-export async function getArtists() {
+interface GetArtistsOptions {
+  featuredOnly?: boolean;
+}
+
+export async function getArtists(options?: GetArtistsOptions) {
   const url = `https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`;
   console.log("ENV - BASE_ID:", BASE_ID);
   console.log("ENV - API_KEY:", AIRTABLE_API_KEY ? "Loaded ✅" : "Missing ❌");
@@ -16,5 +20,13 @@ export async function getArtists() {
       Authorization: `Bearer ${AIRTABLE_API_KEY}`
     }
   });
-  return res.data.records;
+  
+  let records = res.data.records;
+  
+  // Filter for featured artists if requested
+  if (options?.featuredOnly) {
+    records = records.filter((record: any) => record.fields.Featured === true);
+  }
+  
+  return records;
 }
