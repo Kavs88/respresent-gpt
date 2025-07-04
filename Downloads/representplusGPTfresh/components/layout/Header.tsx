@@ -22,7 +22,7 @@ export default function Header() {
               {link.label}
             </LinkWithCursor>
           ))}
-          <LinkWithCursor href="/contact" className="bg-primary text-black font-bold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
+          <LinkWithCursor href="/contact" className="bg-primary text-black font-bold px-5 py-2 rounded-full hover:opacity-90 transition-opacity ml-4">
             Let's Talk
           </LinkWithCursor>
         </nav>

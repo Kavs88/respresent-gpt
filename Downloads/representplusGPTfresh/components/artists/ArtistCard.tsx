@@ -6,10 +6,10 @@ export function ArtistCard({ artist, themeColor }: { artist: Artist; themeColor?
   return (
     <Link
       href={`/artists/${artist.id}`}
-      className="group block bg-card border border-border rounded-lg p-4 text-foreground transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1"
+      className="group block bg-card border border-border rounded-lg p-3 text-foreground transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-1"
     >
       <div
-        className={`relative aspect-square w-full overflow-hidden rounded-lg p-2 border-4`}
+        className={`relative aspect-video w-full overflow-hidden rounded-lg p-2 border-4`}
         style={{ borderColor: themeColor || 'var(--border)' }}
       >
         {artist.fields.ProfileImage?.[0]?.url ? (

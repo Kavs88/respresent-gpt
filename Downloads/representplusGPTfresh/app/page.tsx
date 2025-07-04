@@ -1,6 +1,7 @@
 import { getArtists } from "@/lib/airtable";
 import HomePageClient from "@/components/home/HomePageClient";
 import { Artist, Attachment } from "@/types/artist";
+import ArticlesSection from '@/components/home/ArticlesSection';
 
 export default async function Home() {
   const featuredArtists: Artist[] = await getArtists({ featuredOnly: true });
@@ -9,9 +10,12 @@ export default async function Home() {
   );
 
   return (
-    <HomePageClient 
-      featuredArtists={featuredArtists} 
-      artworks={allArtworks} 
-    />
+    <>
+      <HomePageClient 
+        featuredArtists={featuredArtists} 
+        artworks={allArtworks} 
+      />
+      <ArticlesSection />
+    </>
   );
 } 
