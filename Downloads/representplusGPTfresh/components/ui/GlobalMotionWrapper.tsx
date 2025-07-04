@@ -17,7 +17,7 @@ const CustomCursor = () => {
 
   return (
     <motion.div
-      className="hidden md:block fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-primary pointer-events-none z-50"
+      className="hidden md:block fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-primary pointer-events-none z-[9999]"
       style={{ translateX: mousePosition.x - 16, translateY: mousePosition.y - 16 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}
     />
