@@ -66,21 +66,46 @@ const processRecords = (records: any[]): Artist[] => {
  * Fetches all artists, or only featured artists.
  * Returns a clean, validated array of Artist objects.
  */
-export const getArtists = async (
-  options: { featuredOnly?: boolean } = {}
-): Promise<Artist[]> => {
+export const getArtists = async (options: { featuredOnly?: boolean } = {}): Promise<Artist[]> => {
   try {
-    const query = table.select({
-      sort: [{ field: "Name", direction: "asc" }],
-      filterByFormula: options.featuredOnly ? "{Featured} = 1" : "",
-    });
-    const records = await query.all();
-    return processRecords([...records]);
+    // --- TEMPORARY DIAGNOSTIC CODE ---
+    // const query = table.select({
+    //   sort: [{ field: "Name", direction: "asc" }],
+    //   filterByFormula: options.featuredOnly ? "{Featured} = 1" : "",
+    // });
+    // const records = await query.all();
+    // return processRecords([...records]);
+    console.log("RUNNING HARDCODED HANDSHAKE TEST");
+    const record = await base("Artists").find('recGdQ0i5a8m3Rdr3');
+    if (!record) {
+      console.log("Hardcoded Handshake FAILED: Record not found.");
+      return [];
+    }
+    // processRecord expects a single record, not an array
+    const processed = processRecord(record);
+    console.log("Hardcoded Handshake SUCCESS: Record processed.");
+    return processed ? [processed] : [];
+    // --- END OF TEMPORARY CODE ---
   } catch (error) {
     console.error("Airtable API error in getArtists:", error);
     return [];
   }
 };
+
+// Add a processRecord helper for this diagnostic if not present
+function processRecord(record: any): Artist | null {
+  if (!record || !record.id || !record.fields) {
+    console.warn("Airtable record was missing or malformed.", record);
+    return null;
+  }
+  const dataToParse = { id: record.id, fields: record.fields };
+  const validatedData = artistSchema.safeParse(dataToParse);
+  if (!validatedData.success) {
+    console.error("Zod Validation Error:", validatedData.error.flatten());
+    return null;
+  }
+  return validatedData.data;
+}
 
 /**
  * Fetches a single artist by their Record ID.
