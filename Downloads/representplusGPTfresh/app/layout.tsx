@@ -23,11 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${lora.variable}`}>
       <body className="bg-background font-sans text-foreground flex flex-col min-h-screen">
-        <Header />
-        <PageTransitionWrapper>
-          <main className="flex-grow">{children}</main>
-        </PageTransitionWrapper>
-        <Footer />
+        <GlobalMotionWrapper>
+          <Header />
+          <PageTransitionWrapper>
+            <main className="flex-grow">{children}</main>
+          </PageTransitionWrapper>
+          <Footer />
+        </GlobalMotionWrapper>
       </body>
     </html>
   )
