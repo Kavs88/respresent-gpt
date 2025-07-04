@@ -10,6 +10,7 @@ import ArtworkCarousel from './ArtworkCarousel';
 import ContactSection from './ContactSection';
 import { Artist } from '@/types/artist';
 import { Attachment } from '@/types/artist';
+import ArtistTicker from './ArtistTicker';
 
 interface HomePageClientProps {
   featuredArtists: Artist[];
@@ -96,15 +97,7 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
               </p>
             </RevealOnScroll>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredArtists.map((artist) => (
-              <RevealOnScroll key={artist.id} delay={0.1}>
-                <div className="bg-black/10 p-4 rounded-lg">
-                  <ArtistCard artist={artist} themeColor={artist.fields.ThemePrimaryColor} />
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+          <ArtistTicker artists={featuredArtists} />
         </div>
       </section>
 
