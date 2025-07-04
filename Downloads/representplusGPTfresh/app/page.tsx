@@ -1,6 +1,6 @@
 import { getArtists } from "@/lib/airtable";
 import HomePageClient from "@/components/home/HomePageClient";
-import { Artist, Attachment } from "@/types/artist";
+import { Artist, Attachment } from '@/lib/airtable';
 import ArticlesSection from '@/components/home/ArticlesSection';
 
 export default async function Home() {

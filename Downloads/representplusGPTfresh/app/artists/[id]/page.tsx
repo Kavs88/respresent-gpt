@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { getArtistById } from '../../../lib/airtable';
-import { Artist } from '@/types/artist';
+import { Artist } from '@/lib/airtable';
 import { NextSeo } from 'next-seo';
 import ArtistPageClient from './ArtistPageClient';
 

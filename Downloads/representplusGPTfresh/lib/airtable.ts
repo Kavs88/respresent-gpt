@@ -2,10 +2,39 @@
 
 import Airtable from "airtable";
 import { z } from "zod";
-import { artistSchema, Artist } from "@/types/artist";
 
 // ==================================
-// Airtable Configuration
+// SCHEMAS & TYPES ARE NOW DEFINED HERE
+// ==================================
+
+export const attachmentSchema = z.object({
+  id: z.string(),
+  url: z.string().url(),
+  filename: z.string(),
+});
+
+export const artistSchema = z.object({
+  id: z.string(),
+  fields: z.object({
+    Name: z.string(),
+    Specialty: z.string().optional(),
+    Bio: z.string().optional(),
+    ProfileImage: z.array(attachmentSchema).optional(),
+    Artwork: z.array(attachmentSchema).optional(),
+    Tags: z.array(z.string()).optional(),
+    Featured: z.boolean().optional(),
+    GeneratedBannerImage: z.array(attachmentSchema).optional(),
+    ThemePrimaryColor: z.string().optional(),
+    ThemeBackgroundColor: z.string().optional(),
+    ThemeTextColor: z.string().optional(),
+  }),
+});
+
+export type Artist = z.infer<typeof artistSchema>;
+export type Attachment = z.infer<typeof attachmentSchema>;
+
+// ==================================
+// AIRTABLE CONFIG & FUNCTIONS
 // ==================================
 
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(

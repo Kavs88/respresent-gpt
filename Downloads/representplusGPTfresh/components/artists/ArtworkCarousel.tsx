@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import { Attachment } from '@/types/artist';
+import { Attachment } from '@/lib/airtable';
 
 export function ArtworkCarousel({ artworks, themeColor }: { artworks: Attachment[]; themeColor?: string }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()]);

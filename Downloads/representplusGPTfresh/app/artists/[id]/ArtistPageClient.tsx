@@ -13,7 +13,7 @@ import {
   Mail
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-import { Artist } from '@/types/artist';
+import { Artist } from '@/lib/airtable';
 
 // Animation variants
 const fadeUp = {

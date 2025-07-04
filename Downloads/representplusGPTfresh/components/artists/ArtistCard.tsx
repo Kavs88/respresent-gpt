@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Artist } from "@/types/artist";
+import { Artist } from '@/lib/airtable';
 
 export function ArtistCard({ artist, themeColor }: { artist: Artist; themeColor?: string }) {
   return (

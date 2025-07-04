@@ -8,8 +8,8 @@ import LinkWithCursor from '../ui/LinkWithCursor';
 import { ArtistCard } from '@/components/artists/ArtistCard';
 import ArtworkCarousel from './ArtworkCarousel';
 import ContactSection from './ContactSection';
-import { Artist } from '@/types/artist';
-import { Attachment } from '@/types/artist';
+import { Artist } from '@/lib/airtable';
+import { Attachment } from '@/lib/airtable';
 import ArtistTicker from './ArtistTicker';
 
 interface HomePageClientProps {
