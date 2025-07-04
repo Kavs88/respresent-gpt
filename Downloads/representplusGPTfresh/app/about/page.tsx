@@ -1,17 +1,9 @@
+"use client";
 import React from 'react';
-import { Metadata } from 'next';
 import { motion } from 'framer-motion';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 
-export const metadata: Metadata = {
-  title: 'About Us | Represent+',
-  description: 'Discover Represent+, the premier platform connecting exceptional creative talent with opportunities worldwide. Learn about our mission, values, and commitment to artistic excellence.',
-  openGraph: {
-    title: 'About Us | Represent+',
-    description: 'Discover Represent+, the premier platform connecting exceptional creative talent with opportunities worldwide.',
-    type: 'website',
-  },
-};
+
 
 // Animation variants
 const fadeUp = {
