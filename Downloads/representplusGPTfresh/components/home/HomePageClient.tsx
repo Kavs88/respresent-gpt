@@ -1,12 +1,12 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { AnimatedText } from '@/components/ui/AnimatedText';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArtistCard } from '@/components/artists/ArtistCard';
-import { ArtworkCarousel } from './ArtworkCarousel';
+import ArtworkCarousel from './ArtworkCarousel';
 import { Artist } from '@/types/artist';
 import { Attachment } from '@/types/artist';
 
@@ -16,15 +16,6 @@ interface HomePageClientProps {
 }
 
 export default function HomePageClient({ featuredArtists, artworks }: HomePageClientProps) {
-  // Carousel state
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  useEffect(() => {
-    if (artworks.length < 2) return;
-    const interval = setInterval(() => {
-      setCarouselIndex((i) => (i + 1) % artworks.length);
-    }, 3500);
-    return () => clearInterval(interval);
-  }, [artworks]);
 
   // Testimonials (static for now)
   const testimonials = [
