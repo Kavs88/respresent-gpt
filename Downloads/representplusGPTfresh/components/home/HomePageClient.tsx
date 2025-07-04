@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArtistCard } from '@/components/artists/ArtistCard';
 import ArtworkCarousel from './ArtworkCarousel';
+import ContactSection from './ContactSection';
 import { Artist } from '@/types/artist';
 import { Attachment } from '@/types/artist';
 
@@ -128,6 +129,9 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
           </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <ContactSection />
     </div>
   );
 } 

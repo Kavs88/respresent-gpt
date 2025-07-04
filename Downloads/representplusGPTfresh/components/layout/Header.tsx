@@ -16,12 +16,15 @@ export default function Header() {
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
         <Logo />
         {/* Desktop nav */}
-        <nav className="hidden md:flex gap-8 text-base font-medium">
+        <nav className="hidden md:flex gap-8 text-base font-medium items-center">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
               {link.label}
             </Link>
           ))}
+          <Link href="/contact" className="bg-primary text-black font-bold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
+            Let's Talk
+          </Link>
         </nav>
         {/* Hamburger for mobile */}
         <button
