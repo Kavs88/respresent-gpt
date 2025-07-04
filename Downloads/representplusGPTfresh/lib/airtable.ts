@@ -40,25 +40,22 @@ export type Attachment = z.infer<typeof attachmentSchema>;
 const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(
   process.env.AIRTABLE_BASE_ID as string
 );
+const table = base("Artists");
 
 // ==================================
 // Internal Record Processor (The Guard)
 // Ensures all data matches our schema before being used.
 // ==================================
 
-const processRecord = (record: any): Artist | null => {
-  if (!record || !record.id || !record.fields) {
-    console.warn("Airtable record was missing or malformed.", record);
-    return null;
+const processRecords = (records: any[]): Artist[] => {
+  const validated = z.array(artistSchema).safeParse(
+    records.map(r => ({ id: r.id, fields: r.fields }))
+  );
+  if (!validated.success) {
+    console.error("Zod Validation Error:", validated.error.flatten());
+    return [];
   }
-  const dataToParse = { id: record.id, fields: record.fields };
-  const validatedData = artistSchema.safeParse(dataToParse);
-
-  if (!validatedData.success) {
-    console.error("Zod Validation Error:", validatedData.error.flatten());
-    return null;
-  }
-  return validatedData.data;
+  return validated.data;
 };
 
 // ==================================
@@ -72,21 +69,16 @@ const processRecord = (record: any): Artist | null => {
 export const getArtists = async (
   options: { featuredOnly?: boolean } = {}
 ): Promise<Artist[]> => {
-  const { featuredOnly } = options;
-  const selectOptions: any = {
-    sort: [{ field: "Name", direction: "asc" }],
-  };
-
-  if (featuredOnly) {
-    selectOptions.filterByFormula = "{Featured} = 1";
-  }
-
   try {
-    const records = await base("Artists").select(selectOptions).all();
-    return records.map(processRecord).filter(Boolean) as Artist[];
+    const query = table.select({
+      sort: [{ field: "Name", direction: "asc" }],
+      filterByFormula: options.featuredOnly ? "{Featured} = 1" : "",
+    });
+    const records = await query.all();
+    return processRecords([...records]);
   } catch (error) {
     console.error("Airtable API error in getArtists:", error);
-    return []; // Always return an empty array on error to prevent crashes.
+    return [];
   }
 };
 
@@ -97,22 +89,17 @@ export const getArtists = async (
  */
 export const getArtistById = async (id: string): Promise<Artist | null> => {
   try {
-    const records = await base("Artists")
-      .select({
-        filterByFormula: `RECORD_ID() = '${id}'`,
-        maxRecords: 1,
-      })
-      .firstPage();
-
-    if (!records || records.length === 0) {
-      console.warn(`No artist found in Airtable with ID: ${id}`);
-      return null; // Correctly handle the "not found" case.
-    }
-
-    return processRecord(records[0]);
+    const query = table.select({
+      filterByFormula: `RECORD_ID() = '${id}'`,
+      maxRecords: 1,
+    });
+    const records = await query.all();
+    if (records.length === 0) return null;
+    const processed = processRecords([...records]);
+    return processed[0] || null;
   } catch (error) {
-    console.error(`Airtable API error fetching artist by ID ${id}:`, error);
-    return null; // Return null on any other API error.
+    console.error(`Airtable API error in getArtistById for ${id}:`, error);
+    return null;
   }
 };
 
@@ -122,10 +109,9 @@ export const getArtistById = async (id: string): Promise<Artist | null> => {
  */
 export const getAllTags = async (): Promise<string[]> => {
   try {
-    const records = await base("Artists").select({ fields: ["Tags"] }).all();
-    const tagSets = records.map((record) => record.get("Tags") || []);
-    const allTags = new Set<string>(tagSets.flat());
-    return Array.from(allTags).sort(); // Sort alphabetically for consistency
+    const records = await table.select({ fields: ["Tags"] }).all();
+    const tagSets = records.map((record) => (record.get("Tags") as string[]) || []);
+    return Array.from(new Set(tagSets.flat())).sort();
   } catch (error) {
     console.error("Airtable API error in getAllTags:", error);
     return [];
