@@ -7,9 +7,10 @@ interface AnimatedTextProps {
   el?: ElementType;
   className?: string;
   delay?: number;
+  highlightIndex?: number;
 }
 
-export const AnimatedText = ({ text, el: Wrapper = 'p', className = '', delay = 0 }: AnimatedTextProps) => {
+export const AnimatedText = ({ text, el: Wrapper = 'p', className = '', delay = 0, highlightIndex }: AnimatedTextProps) => {
   const characters = text.split("");
   return (
     <Wrapper className={className}>
@@ -21,6 +22,7 @@ export const AnimatedText = ({ text, el: Wrapper = 'p', className = '', delay = 
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: delay + index * 0.05, ease: 'easeOut' }}
           aria-hidden
+          className={highlightIndex !== undefined && index >= highlightIndex ? 'opacity-60' : ''}
         >
           {char === " " ? "\u00A0" : char}
         </motion.span>

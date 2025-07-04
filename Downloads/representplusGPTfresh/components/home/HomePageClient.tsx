@@ -52,7 +52,7 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
           <RevealOnScroll delay={0}>
             <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-4">
               <AnimatedText text="DISCOVER" className="block text-white" />
-              <AnimatedText text="EXCEPTIONAL" className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400" delay={0.3} />
+              <AnimatedText text="EXCEPTIONAL" className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400" delay={0.3} highlightIndex={9} />
               <AnimatedText text="TALENT" className="block text-white" delay={0.6} />
             </h1>
           </RevealOnScroll>
@@ -73,21 +73,20 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
 
       {/* === Featured Work Carousel === */}
       {artworks.length > 0 && (
-        <section className="py-32 bg-[#121212]">
-          <div className="text-center mb-12">
+        <section className="py-16 bg-card border-y border-border">
+          <div className="text-center mb-8">
             <RevealOnScroll delay={0.1}>
               <h2 className="text-4xl font-serif font-bold text-white">Featured Work</h2>
             </RevealOnScroll>
           </div>
-          {/* This assumes you have a carousel component that can take the artworks array */}
           <ArtworkCarousel artworks={artworks} />
         </section>
       )}
 
       {/* === Featured Artists Section (High-Contrast Theme) === */}
-      <section className="py-32 bg-primary">
+      <section className="py-16 bg-primary">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <RevealOnScroll delay={0.1}>
               <h2 className="text-5xl font-black text-black tracking-tight">Featured Artists</h2>
             </RevealOnScroll>
@@ -97,7 +96,16 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
               </p>
             </RevealOnScroll>
           </div>
-          <ArtistTicker artists={featuredArtists} />
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-transparent -mx-4 px-4">
+            <div className="flex gap-6 md:gap-8">
+              {featuredArtists.map((artist) => (
+                <div key={artist.id} className="min-w-[260px] max-w-xs flex-shrink-0">
+                  <ArtistCard artist={artist} themeColor={artist.fields.ThemePrimaryColor} />
+                </div>
+              ))}
+            </div>
+            <div className="mt-2 text-xs text-black/50 text-center select-none">Scroll to see more</div>
+          </div>
         </div>
       </section>
 
