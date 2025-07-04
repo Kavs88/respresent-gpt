@@ -6,21 +6,55 @@ import { useEffect, useState } from 'react';
 
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
+
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button')) {
+        setIsHovering(true);
+      }
+    };
+
+    const onMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button')) {
+        setIsHovering(false);
+      }
+    };
+
     window.addEventListener('mousemove', onMouseMove);
-    return () => window.removeEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseover', onMouseOver);
+    window.addEventListener('mouseout', onMouseOut);
+    
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseover', onMouseOver);
+      window.removeEventListener('mouseout', onMouseOut);
+    };
   }, []);
 
   return (
-    <motion.div
-      className="hidden md:block fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-primary pointer-events-none z-[9999]"
-      style={{ translateX: mousePosition.x - 16, translateY: mousePosition.y - 16 }}
-      transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-    />
+    <>
+      {/* Dot - Always visible */}
+      <motion.div
+        className="hidden md:block fixed top-0 left-0 w-3 h-3 rounded-full bg-primary pointer-events-none z-[9999]"
+        style={{ translateX: mousePosition.x - 6, translateY: mousePosition.y - 6 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      />
+      
+      {/* Ring - Expands on hover */}
+      <motion.div
+        className="hidden md:block fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-primary pointer-events-none z-[9998]"
+        style={{ translateX: mousePosition.x - 16, translateY: mousePosition.y - 16 }}
+        animate={{ scale: isHovering ? 1 : 0 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      />
+    </>
   );
 };
 
