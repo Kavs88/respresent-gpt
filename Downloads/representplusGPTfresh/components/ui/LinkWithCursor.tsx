@@ -1,3 +1,4 @@
+"use client";
 import Link, { LinkProps } from 'next/link';
 import React from 'react';
 import { useCursor } from './CursorContext';
