@@ -1,46 +1,53 @@
 "use client";
 import React from "react";
-import { FaInstagram, FaEnvelope, FaTwitter, FaArtstation } from 'react-icons/fa';
+import Link from 'next/link';
+import { FaWhatsapp, FaEnvelope } from 'react-icons/fa';
+import { SiZalo } from 'react-icons/si';
+import LinkWithCursor from './LinkWithCursor';
 
-interface PlatformContactButtonsProps {
-  artistName?: string;
-}
+const contactMethods = [
+  {
+    name: 'WhatsApp',
+    href: 'https://wa.me/1234567890',
+    icon: <FaWhatsapp size={40} className="text-white mb-4" />,
+    bg: 'bg-[#25D366] hover:bg-[#1DA851]',
+    label: 'Chat on WhatsApp',
+    brand: 'WhatsApp',
+  },
+  {
+    name: 'Zalo',
+    href: 'https://zalo.me/1234567890',
+    icon: <SiZalo size={40} className="text-white mb-4" />,
+    bg: 'bg-[#0068FF] hover:bg-[#0052CC]',
+    label: 'Message on Zalo',
+    brand: 'Zalo',
+  },
+  {
+    name: 'Email',
+    href: 'mailto:hello@representplus.com',
+    icon: <FaEnvelope size={40} className="text-muted-foreground mb-4" />,
+    bg: 'bg-muted hover:bg-opacity-80',
+    label: 'Send us an Email',
+    brand: 'Email',
+  },
+];
 
-const getMessage = (artistName?: string) =>
-  artistName
-    ? `Hi, I am contacting you regarding ${artistName}...`
-    : "Hi, I would like to inquire about Represent+....";
-
-function PlatformContactButtons({ artistName }: PlatformContactButtonsProps) {
-  const message = encodeURIComponent(getMessage(artistName));
+export default function PlatformContactButtons() {
   return (
-    <div className="flex flex-wrap gap-3">
-      <a
-        href={`mailto:hello@represent.plus?subject=Inquiry&body=${message}`}
-        className="px-4 py-2 rounded bg-primary text-black font-semibold hover:bg-primary/80 transition"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Email
-      </a>
-      <a
-        href={`https://wa.me/1234567890?text=${message}`}
-        className="px-4 py-2 rounded bg-green-500 text-black font-semibold hover:bg-green-400 transition"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        WhatsApp
-      </a>
-      <a
-        href={`https://instagram.com/representplus`}
-        className="px-4 py-2 rounded bg-pink-500 text-black font-semibold hover:bg-pink-400 transition"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Instagram
-      </a>
+    <div className="flex flex-col md:flex-row gap-6 w-full justify-center items-center mt-8">
+      {contactMethods.map((method) => (
+        <LinkWithCursor
+          key={method.name}
+          href={method.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`group flex flex-col items-center justify-center p-8 rounded-lg shadow-lg transition-all duration-200 text-center w-64 ${method.bg}`}
+        >
+          {method.icon}
+          <span className="text-lg font-semibold text-white mb-2">{method.label}</span>
+          <span className="text-xs opacity-80 text-white group-hover:opacity-100 transition">{method.brand}</span>
+        </LinkWithCursor>
+      ))}
     </div>
   );
-}
-
-export default PlatformContactButtons; 
+} 

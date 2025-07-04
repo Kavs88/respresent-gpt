@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Logo } from "../ui/Logo";
-import Link from "next/link";
+import LinkWithCursor from '../ui/LinkWithCursor';
 
 const navLinks = [
   { href: "/artists", label: "Artists" },
@@ -18,13 +18,13 @@ export default function Header() {
         {/* Desktop nav */}
         <nav className="hidden md:flex gap-8 text-base font-medium items-center">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
+            <LinkWithCursor key={link.href} href={link.href} className="hover:text-primary transition-colors">
               {link.label}
-            </Link>
+            </LinkWithCursor>
           ))}
-          <Link href="/contact" className="bg-primary text-black font-bold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
+          <LinkWithCursor href="/contact" className="bg-primary text-black font-bold px-6 py-2 rounded-full hover:opacity-90 transition-opacity">
             Let's Talk
-          </Link>
+          </LinkWithCursor>
         </nav>
         {/* Hamburger for mobile */}
         <button
@@ -50,9 +50,9 @@ export default function Header() {
           </button>
           <nav className="flex flex-col gap-8 text-2xl font-semibold">
             {navLinks.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              <LinkWithCursor key={link.href} href={link.href} className="hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
                 {link.label}
-              </Link>
+              </LinkWithCursor>
             ))}
           </nav>
         </div>

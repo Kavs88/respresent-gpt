@@ -1,6 +1,6 @@
 import React from "react";
 import { Logo } from "../ui/Logo";
-import Link from "next/link";
+import LinkWithCursor from '../ui/LinkWithCursor';
 import SocialIcons from "../ui/SocialIcons";
 
 const navLinks = [
@@ -23,9 +23,9 @@ export default function Footer() {
         <nav className="flex flex-col items-center gap-2 md:items-center">
           <span className="uppercase text-xs font-semibold text-muted-foreground mb-2">Navigation</span>
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="hover:text-primary transition-colors">
+            <LinkWithCursor key={link.href} href={link.href} className="hover:text-primary transition-colors">
               {link.label}
-            </Link>
+            </LinkWithCursor>
           ))}
         </nav>
         {/* Socials */}

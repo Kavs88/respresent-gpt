@@ -4,7 +4,7 @@ import { AnimatedText } from '@/components/ui/AnimatedText';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import Image from 'next/image';
-import Link from 'next/link';
+import LinkWithCursor from '../ui/LinkWithCursor';
 import { ArtistCard } from '@/components/artists/ArtistCard';
 import ArtworkCarousel from './ArtworkCarousel';
 import ContactSection from './ContactSection';
@@ -61,11 +61,11 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={1.4}>
-            <Link href="/artists" className="mt-8 inline-block">
+            <LinkWithCursor href="/artists" className="mt-8 inline-block">
               <MagneticButton className="bg-primary text-black font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-transform transition-all duration-300 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary/50">
                 Explore the Roster
               </MagneticButton>
-            </Link>
+            </LinkWithCursor>
           </RevealOnScroll>
         </div>
       </section>
@@ -116,16 +116,16 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
             Browse our full roster or reach out to Represent+ for bespoke artist recommendations and collaborations.
           </p>
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Link href="/artists">
+            <LinkWithCursor href="/artists">
               <MagneticButton className="bg-primary text-black font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-transform transition-all duration-300 hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary/50">
                 View All Artists
               </MagneticButton>
-            </Link>
-            <Link href="/contact">
+            </LinkWithCursor>
+            <LinkWithCursor href="/contact">
               <MagneticButton className="bg-black text-primary border border-primary font-bold text-lg px-8 py-4 rounded-full shadow-lg transition-transform transition-all duration-300 hover:bg-primary hover:text-black focus:outline-none focus:ring-2 focus:ring-primary/50">
                 Contact the Agency
               </MagneticButton>
-            </Link>
+            </LinkWithCursor>
           </div>
         </div>
       </section>
