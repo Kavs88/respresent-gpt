@@ -5,7 +5,7 @@ import Link from 'next/link';
 const articles = [
   {
     id: 1,
-    image: '/media/article1.jpg',
+    image: 'https://picsum.photos/seed/rp_article1/600/400',
     category: 'Press',
     title: 'Represent+ Featured in Art Magazine',
     description: 'Our platform was recently highlighted for its innovative approach to artist representation.',
@@ -13,7 +13,7 @@ const articles = [
   },
   {
     id: 2,
-    image: '/media/article2.jpg',
+    image: 'https://picsum.photos/seed/rp_article2/600/400',
     category: 'Interview',
     title: 'Interview with Founder',
     description: 'A candid conversation with our founder about the future of creative talent.',
@@ -21,7 +21,7 @@ const articles = [
   },
   {
     id: 3,
-    image: '/media/article3.jpg',
+    image: 'https://picsum.photos/seed/rp_article3/600/400',
     category: 'Press',
     title: 'Gallery Partnership Announced',
     description: 'Represent+ partners with leading galleries to expand opportunities for artists.',
@@ -29,7 +29,7 @@ const articles = [
   },
   {
     id: 4,
-    image: '/media/article4.jpg',
+    image: 'https://picsum.photos/seed/rp_article4/600/400',
     category: 'Feature',
     title: 'Artist Success Story',
     description: 'How one artist leveraged Represent+ to launch an international career.',

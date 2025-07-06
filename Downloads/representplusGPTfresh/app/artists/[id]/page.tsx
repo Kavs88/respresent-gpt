@@ -1,45 +1,19 @@
-import React from 'react';
-import { notFound } from 'next/navigation';
-import { getArtistById } from '../../../lib/airtable';
-import { Artist } from '@/lib/airtable';
-import { NextSeo } from 'next-seo';
-import ArtistPageClient from './ArtistPageClient';
+// app/artists/[id]/page.tsx
 
-interface ArtistPageProps {
-  params: {
-    id: string;
-  };
-}
+import { getArtistById } from "@/lib/airtable";
+import { notFound } from "next/navigation";
+import ArtistPageClient from "./ArtistPageClient";
 
-export default async function ArtistPage({ params }: ArtistPageProps) {
+// This is a Server Component, so it can be async
+export default async function ArtistPage({ params }: { params: { id: string } }) {
+  // 1. Fetch this specific artist's data on the server
   const artist = await getArtistById(params.id);
 
+  // 2. If no artist is found, immediately show the 404 page
   if (!artist) {
     notFound();
   }
 
-  // SEO configuration
-  const seoConfig = {
-    title: `${artist.fields.Name} | Represent+`,
-    description: artist.fields.Bio?.substring(0, 160) || `Discover ${artist.fields.Name}, a talented ${artist.fields.Specialty} represented by Represent+.`,
-    openGraph: {
-      title: `${artist.fields.Name} | Represent+`,
-      description: artist.fields.Bio?.substring(0, 160) || `Discover ${artist.fields.Name}, a talented ${artist.fields.Specialty} represented by Represent+.`,
-      images: artist.fields.ProfileImage?.[0]?.url ? [
-        {
-          url: artist.fields.ProfileImage[0].url,
-          width: 1200,
-          height: 630,
-          alt: artist.fields.Name,
-        }
-      ] : [],
-    },
-  };
-
-  return (
-    <>
-      <NextSeo {...seoConfig} />
-      <ArtistPageClient artist={artist} />
-    </>
-  );
-} 
+  // The Server Shell's only job is to fetch data and pass it to the Client Core.
+  return <ArtistPageClient artist={artist} />;
+}

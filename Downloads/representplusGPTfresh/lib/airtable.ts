@@ -68,24 +68,26 @@ const processRecords = (records: any[]): Artist[] => {
  */
 export const getArtists = async (options: { featuredOnly?: boolean } = {}): Promise<Artist[]> => {
   try {
-    // --- TEMPORARY DIAGNOSTIC CODE ---
-    // const query = table.select({
-    //   sort: [{ field: "Name", direction: "asc" }],
-    //   filterByFormula: options.featuredOnly ? "{Featured} = 1" : "",
-    // });
-    // const records = await query.all();
-    // return processRecords([...records]);
-    console.log("RUNNING HARDCODED HANDSHAKE TEST");
-    const record = await base("Artists").find('recGdQ0i5a8m3Rdr3');
-    if (!record) {
-      console.log("Hardcoded Handshake FAILED: Record not found.");
-      return [];
+    console.log("getArtists called with options:", options);
+    
+    const query = table.select({
+      sort: [{ field: "Name", direction: "asc" }],
+      filterByFormula: options.featuredOnly ? "NOT({Featured} = '')" : "",
+    });
+    
+    const records = await query.all();
+    console.log(`Found ${records.length} total records from Airtable`);
+    
+    const processed = processRecords([...records]);
+    console.log(`Processed ${processed.length} valid records`);
+    
+    if (options.featuredOnly) {
+      const featured = processed.filter(artist => artist.fields.Featured === true);
+      console.log(`Filtered to ${featured.length} featured artists`);
+      return featured;
     }
-    // processRecord expects a single record, not an array
-    const processed = processRecord(record);
-    console.log("Hardcoded Handshake SUCCESS: Record processed.");
-    return processed ? [processed] : [];
-    // --- END OF TEMPORARY CODE ---
+    
+    return processed;
   } catch (error) {
     console.error("Airtable API error in getArtists:", error);
     return [];
