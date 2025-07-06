@@ -12,6 +12,12 @@ html { cursor: none; }
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .section-padding {
+    @apply py-20 lg:py-28;
+  }
+}
+
 body::after {
   content: "";
   position: fixed;

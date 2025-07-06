@@ -1,0 +1,20 @@
+/* style.css */
+body { color: #EAEAEA; background-color: #121212; }
+.stApp { background-color: #121212; }
+h1, h2, h3 { color: #EAEAEA; font-family: sans-serif; }
+p, .stMarkdown { color: #A0A0A0; }
+[data-testid="stSidebar"] { background-color: #1E1E1E; border-right: 1px solid #2e2e2e; }
+.stButton > button, .stDownloadButton > button {
+    border-radius: 8px; font-weight: bold; padding: 0.5em 1em; border: 1px solid #4D9E9A;
+    color: #FFFFFF; background-color: #4D9E9A; transition: all 0.2s ease-in-out;
+}
+.stButton > button:hover, .stDownloadButton > button:hover {
+    border-color: #58B3AD; background-color: #58B3AD; box-shadow: 0 0 10px #4D9E9A33;
+}
+.stTextInput > div > div > input, .stTextArea > div > textarea, .stNumberInput > div > div > input {
+    background-color: #2E2E2E; color: #EAEAEA; border: 1px solid #4A4A4A; border-radius: 8px;
+}
+.stTextInput > div > div > input:focus, .stTextArea > div > textarea:focus, .stNumberInput > div > div > input:focus {
+    border-color: #4D9E9A; box-shadow: 0 0 0 2px #4D9E9A33;
+}
+.stSpinner > div > div { border-top-color: #4D9E9A; }

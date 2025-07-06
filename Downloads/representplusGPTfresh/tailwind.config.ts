@@ -20,6 +20,9 @@ const config: Config = {
       muted: 'rgb(var(--muted) / <alpha-value>)',
       card: 'rgb(var(--card) / <alpha-value>)',
       border: 'rgb(var(--border) / <alpha-value>)',
+      green: {
+        primary: '#4D9E9A',
+      },
     },
     extend: {}, // We leave extend empty for now
   },
