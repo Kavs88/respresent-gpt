@@ -39,12 +39,12 @@ const articles = [
 
 export default function ArticlesSection() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24" style={{ background: '#23272a' }}>
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-black mb-12 text-center">Articles & Media</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {articles.map((article) => (
-            <div key={article.id} className="bg-card rounded-xl shadow-lg overflow-hidden flex flex-col">
+            <div key={article.id} className="bg-card rounded-xl shadow-lg overflow-hidden flex flex-col border-4" style={{ borderColor: '#17624A' }}>
               <div className="relative w-full aspect-video">
                 <Image src={article.image} alt={article.title} fill className="object-cover" />
               </div>

@@ -46,7 +46,8 @@ export default function Header() {
           ))}
           <LinkWithCursor 
             href="/contact" 
-            className="bg-primary text-black font-bold px-5 py-2 rounded-full hover:opacity-90 transition-opacity ml-4 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            className="font-bold px-5 py-2 rounded-full hover:opacity-90 transition-opacity ml-4 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            style={{ backgroundColor: '#17624A', color: '#fff' }}
           >
             Let's Talk
           </LinkWithCursor>
@@ -94,7 +95,8 @@ export default function Header() {
             ))}
             <LinkWithCursor 
               href="/contact" 
-              className="bg-primary text-black font-bold px-6 py-3 rounded-full hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+              className="font-bold px-6 py-3 rounded-full hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+              style={{ backgroundColor: '#17624A', color: '#fff' }}
               onClick={() => setIsMenuOpen(false)}
             >
               Let's Talk

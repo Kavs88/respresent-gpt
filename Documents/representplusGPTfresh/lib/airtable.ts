@@ -69,7 +69,7 @@ const processRecords = (records: any[]): Artist[] => {
  */
 export const getArtists = async (options: { featuredOnly?: boolean } = {}): Promise<Artist[]> => {
   try {
-    console.log("getArtists called with options:", options);
+    // console.log("getArtists called with options:", options);
     
     const query = table.select({
       fields: [
@@ -91,10 +91,10 @@ export const getArtists = async (options: { featuredOnly?: boolean } = {}): Prom
     });
     
     const records = await query.all();
-    console.log(`Found ${records.length} total records from Airtable`);
+    // console.log(`Found ${records.length} total records from Airtable`);
     
     const processed = processRecords([...records]);
-    console.log(`Processed ${processed.length} valid records`);
+    // console.log(`Processed ${processed.length} valid records`);
     
 
     

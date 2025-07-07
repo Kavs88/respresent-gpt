@@ -10,14 +10,14 @@ interface ArtistsPageClientProps {
 }
 
 export default function ArtistsPageClient({ artists, allTags }: ArtistsPageClientProps) {
-  console.log('ArtistsPageClient received:', { artists, allTags });
+  //   console.log('ArtistsPageClient received:', { artists, allTags });
   
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   // Filter artists based on search term and selected tags
   const filteredArtists = useMemo(() => {
-    console.log('Filtering artists:', artists);
+    //   console.log('Filtering artists:', artists);
     return artists.filter((artist) => {
       // Search term filter
       const matchesSearch = searchTerm === '' || 
@@ -35,7 +35,7 @@ export default function ArtistsPageClient({ artists, allTags }: ArtistsPageClien
     });
   }, [artists, searchTerm, selectedTags]);
 
-  console.log('Filtered artists:', filteredArtists);
+  //   console.log('Filtered artists:', filteredArtists);
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev => 
@@ -118,11 +118,11 @@ export default function ArtistsPageClient({ artists, allTags }: ArtistsPageClien
 
       {/* Artists Grid */}
       {(() => {
-        console.log('Rendering artists grid with:', filteredArtists.length, 'artists');
+        //   console.log('Rendering artists grid with:', filteredArtists.length, 'artists');
         return filteredArtists.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredArtists.map((artist) => {
-              console.log('Rendering artist:', artist.fields.Name);
+              //   console.log('Rendering artist:', artist.fields.Name);
               return <ArtistCard key={artist.id} artist={artist} />;
             })}
           </div>

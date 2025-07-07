@@ -30,8 +30,10 @@ export default function HomePageClient({ featuredArtists, artworks }: { featured
           </RevealOnScroll>
           <RevealOnScroll delay={1.4}>
             <Link href="/artists" className="mt-8 inline-block">
-              <MagneticButton className="bg-green-400 text-black font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:brightness-110 transition">
-                Explore the Roster
+              <MagneticButton className="bg-black">
+                <span className="px-8 py-4 rounded-full font-bold text-lg shadow-lg transition hover:brightness-110 bg-[#17624A] text-white inline-block">
+                  Explore the Roster
+                </span>
               </MagneticButton>
             </Link>
           </RevealOnScroll>

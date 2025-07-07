@@ -23,7 +23,6 @@ export default async function Home() {
           featuredArtists={featuredArtists} 
           artworks={allArtworks} 
         />
-        <ArticlesSection />
       </main>
     </>
   );

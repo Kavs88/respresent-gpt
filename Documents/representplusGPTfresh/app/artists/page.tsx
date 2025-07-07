@@ -9,7 +9,7 @@ export default async function ArtistsPage() {
     getAllTags()
   ]);
 
-  console.log('ArtistsPage fetched:', { artists, allTags });
+  //   console.log('ArtistsPage fetched:', { artists, allTags });
 
   return (
     <>

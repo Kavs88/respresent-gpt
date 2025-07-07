@@ -15,7 +15,7 @@ export default function ArtworkCarousel({ artworks }: { artworks: Attachment[] }
       <div className="flex">
         {artworks.map((artwork) => (
           <div className="relative flex-grow-0 flex-shrink-0 basis-full md:basis-1/2 lg:basis-1/3 p-4" key={artwork.id}>
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg border-4" style={{ borderColor: '#17624A' }}>
               <Image
                 src={artwork.url}
                 alt={artwork.filename || 'Artwork'}
