@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { CursorProvider, useCursor } from './CursorContext';
 
@@ -39,21 +38,10 @@ const CustomCursor = () => {
 };
 
 export const GlobalMotionWrapper = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname();
   return (
     <CursorProvider>
-      <AnimatePresence mode="wait">
-        <CustomCursor />
-        <motion.div
-          key={pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
+      <CustomCursor />
+      {children}
     </CursorProvider>
   );
 }; 

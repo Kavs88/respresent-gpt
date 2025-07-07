@@ -17,10 +17,11 @@ export const artistSchema = z.object({
   id: z.string(),
   fields: z.object({
     Name: z.string(),
-    Specialty: z.string().optional(),
+    Speciality: z.string().optional(),
     Bio: z.string().optional(),
     ProfileImage: z.array(attachmentSchema).optional(),
     Artwork: z.array(attachmentSchema).optional(),
+    SocialLinks: z.string().optional(),
     Tags: z.array(z.string()).optional(),
     Featured: z.boolean().optional(),
     GeneratedBannerImage: z.array(attachmentSchema).optional(),
@@ -71,8 +72,22 @@ export const getArtists = async (options: { featuredOnly?: boolean } = {}): Prom
     console.log("getArtists called with options:", options);
     
     const query = table.select({
+      fields: [
+        "Name",
+        "Speciality",
+        "Bio",
+        "ProfileImage",
+        "Artwork",
+        "SocialLinks",
+        "Tags",
+        "Featured",
+        "GeneratedBannerImage",
+        "ThemePrimaryColor",
+        "ThemeBackgroundColor",
+        "ThemeTextColor"
+      ],
       sort: [{ field: "Name", direction: "asc" }],
-      filterByFormula: options.featuredOnly ? "NOT({Featured} = '')" : "",
+      filterByFormula: options.featuredOnly ? "{Featured} = 1" : "",
     });
     
     const records = await query.all();
@@ -81,11 +96,7 @@ export const getArtists = async (options: { featuredOnly?: boolean } = {}): Prom
     const processed = processRecords([...records]);
     console.log(`Processed ${processed.length} valid records`);
     
-    if (options.featuredOnly) {
-      const featured = processed.filter(artist => artist.fields.Featured === true);
-      console.log(`Filtered to ${featured.length} featured artists`);
-      return featured;
-    }
+
     
     return processed;
   } catch (error) {
@@ -117,6 +128,20 @@ function processRecord(record: any): Artist | null {
 export const getArtistById = async (id: string): Promise<Artist | null> => {
   try {
     const query = table.select({
+      fields: [
+        "Name",
+        "Speciality",
+        "Bio",
+        "ProfileImage",
+        "Artwork",
+        "SocialLinks",
+        "Tags",
+        "Featured",
+        "GeneratedBannerImage",
+        "ThemePrimaryColor",
+        "ThemeBackgroundColor",
+        "ThemeTextColor"
+      ],
       filterByFormula: `RECORD_ID() = '${id}'`,
       maxRecords: 1,
     });

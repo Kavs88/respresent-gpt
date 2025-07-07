@@ -21,7 +21,15 @@ const config: Config = {
       card: 'rgb(var(--card) / <alpha-value>)',
       border: 'rgb(var(--border) / <alpha-value>)',
     },
-    extend: {}, // We leave extend empty for now
+    extend: {
+      colors: {
+        'agency-dark': '#121212',
+        'agency-panel': '#1E1E1E',
+        'agency-mint': '#4D9E9A',
+        'agency-light': '#EAEAEA',
+        'agency-gray': '#A0A0A2',
+      },
+    }, // We leave extend empty for now
   },
   plugins: [],
 }

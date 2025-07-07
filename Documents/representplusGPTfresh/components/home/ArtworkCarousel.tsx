@@ -3,7 +3,7 @@ import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import Image from 'next/image';
-import { Attachment } from '@/lib/airtable';
+import { Attachment } from '@/types/artist';
 
 export default function ArtworkCarousel({ artworks }: { artworks: Attachment[] }) {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 3000 })]);

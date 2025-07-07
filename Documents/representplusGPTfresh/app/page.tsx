@@ -1,7 +1,8 @@
 import { getArtists } from "@/lib/airtable";
 import HomePageClient from "@/components/home/HomePageClient";
-import { Artist, Attachment } from '@/lib/airtable';
+import { Artist, Attachment } from '@/types/artist';
 import ArticlesSection from '@/components/home/ArticlesSection';
+import SEOHead from "@/components/ui/SEOHead";
 
 export default async function Home() {
   const featuredArtists: Artist[] = await getArtists({ featuredOnly: true });
@@ -11,11 +12,19 @@ export default async function Home() {
 
   return (
     <>
-      <HomePageClient 
-        featuredArtists={featuredArtists} 
-        artworks={allArtworks} 
+      <SEOHead 
+        title="AI-Powered Artist Representation Platform"
+        description="Discover and connect with exceptional artists through our AI-powered representation platform. Browse curated portfolios, explore unique artworks, and commission custom pieces from talented creators worldwide."
+        keywords={['artist representation', 'AI art platform', 'commission artwork', 'artist portfolio', 'contemporary art', 'digital art', 'fine art', 'artists for hire']}
+        url="/"
       />
-      <ArticlesSection />
+      <main>
+        <HomePageClient 
+          featuredArtists={featuredArtists} 
+          artworks={allArtworks} 
+        />
+        <ArticlesSection />
+      </main>
     </>
   );
 } 

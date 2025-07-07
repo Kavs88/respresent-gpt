@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ArtistCard } from "@/components/artists/ArtistCard";
-import { Artist } from '@/lib/airtable';
+import { Artist } from '@/types/artist';
 
 interface ArtistTickerProps {
   artists: Artist[];

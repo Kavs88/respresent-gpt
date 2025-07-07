@@ -10,17 +10,20 @@ interface ArtistsPageClientProps {
 }
 
 export default function ArtistsPageClient({ artists, allTags }: ArtistsPageClientProps) {
+  console.log('ArtistsPageClient received:', { artists, allTags });
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   // Filter artists based on search term and selected tags
   const filteredArtists = useMemo(() => {
+    console.log('Filtering artists:', artists);
     return artists.filter((artist) => {
       // Search term filter
       const matchesSearch = searchTerm === '' || 
         artist.fields.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        artist.fields.Specialty.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        artist.fields.Bio.toLowerCase().includes(searchTerm.toLowerCase());
+        (artist.fields.Bio && artist.fields.Bio.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (artist.fields.Speciality && artist.fields.Speciality.toLowerCase().includes(searchTerm.toLowerCase()));
 
       // Tags filter
       const matchesTags = selectedTags.length === 0 || 
@@ -31,6 +34,8 @@ export default function ArtistsPageClient({ artists, allTags }: ArtistsPageClien
       return matchesSearch && matchesTags;
     });
   }, [artists, searchTerm, selectedTags]);
+
+  console.log('Filtered artists:', filteredArtists);
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev => 
@@ -112,30 +117,34 @@ export default function ArtistsPageClient({ artists, allTags }: ArtistsPageClien
       </div>
 
       {/* Artists Grid */}
-      {filteredArtists.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-          {filteredArtists.map((artist) => (
-            <ArtistCard key={artist.id} artist={artist} />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12">
-          <p className="text-muted text-lg">
-            {searchTerm || selectedTags.length > 0 
-              ? 'No artists match your current filters.'
-              : 'No artists available at this time.'
-            }
-          </p>
-          {(searchTerm || selectedTags.length > 0) && (
-            <button
-              onClick={clearFilters}
-              className="mt-4 text-primary hover:opacity-80 transition-opacity"
-            >
-              Clear filters
-            </button>
-          )}
-        </div>
-      )}
+      {(() => {
+        console.log('Rendering artists grid with:', filteredArtists.length, 'artists');
+        return filteredArtists.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {filteredArtists.map((artist) => {
+              console.log('Rendering artist:', artist.fields.Name);
+              return <ArtistCard key={artist.id} artist={artist} />;
+            })}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-muted text-lg">
+              {searchTerm || selectedTags.length > 0 
+                ? 'No artists match your current filters.'
+                : 'No artists available at this time.'
+              }
+            </p>
+            {(searchTerm || selectedTags.length > 0) && (
+              <button
+                onClick={clearFilters}
+                className="mt-4 text-primary hover:opacity-80 transition-opacity"
+              >
+                Clear filters
+              </button>
+            )}
+          </div>
+        );
+      })()}
       </div>
     </div>
   );

@@ -3,12 +3,113 @@ import PlatformContactButtons from "../../components/ui/PlatformContactButtons";
 
 export default function ContactPage() {
   return (
-    <div className="max-w-2xl mx-auto py-24 px-4">
-      <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
+    <div className="min-h-screen relative">
+      {/* Simple Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20">
+        <div className="absolute inset-0 opacity-35" style={{
+          backgroundImage: `
+            repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(0,255,157,0.2) 60px, rgba(0,255,157,0.2) 62px),
+            repeating-linear-gradient(-45deg, transparent, transparent 60px, rgba(0,255,157,0.2) 60px, rgba(0,255,157,0.2) 62px)
+          `,
+          backgroundSize: '120px 120px, 120px 120px'
+        }} />
+      </div>
+      <div className="relative z-10">
+      {/* Hero Section */}
+      <section className="pt-40 pb-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">
+            Let's Create Something Amazing
+          </h1>
+          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
+            Ready to bring your vision to life? Whether you're an artist looking to showcase your work 
+            or a client seeking exceptional talent, we're here to make it happen.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact Methods Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
+            <p className="text-lg text-muted-foreground">
+              Choose your preferred way to connect with us
+            </p>
+          </div>
+          <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-xl">
+            <PlatformContactButtons />
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="py-16 px-4 bg-muted/10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Why Choose Represent+</h2>
+            <p className="text-lg text-muted-foreground">
+              We're not just another platform – we're your creative partner
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-6">
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Fast Response</h3>
+              <p className="text-muted-foreground">We typically respond within 2-4 hours during business hours</p>
+            </div>
+            <div className="text-center p-6">
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Quality Assured</h3>
+              <p className="text-muted-foreground">Every artist is carefully curated to ensure exceptional quality</p>
+            </div>
+            <div className="text-center p-6">
+              <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Personal Touch</h3>
+              <p className="text-muted-foreground">We take the time to understand your unique needs and vision</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
       <p className="text-lg text-muted-foreground mb-8">
-        Interested in working with Represent+ or have a question? Reach out to us via your preferred platform below.
-      </p>
-      <PlatformContactButtons />
+            Don't wait – your next creative project is just a message away.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="https://wa.me/1234567890" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-primary text-black font-bold px-8 py-3 rounded-full hover:opacity-90 transition-opacity inline-flex items-center justify-center"
+            >
+              Start a Conversation
+            </a>
+            <a 
+              href="/artists" 
+              className="border border-primary text-primary font-semibold px-8 py-3 rounded-full hover:bg-primary hover:text-black transition-colors inline-flex items-center justify-center"
+            >
+              Browse Artists
+            </a>
+          </div>
+        </div>
+      </section>
+      </div>
     </div>
   );
 } 

@@ -41,8 +41,9 @@ export function ArtistContactButtons({ artist, themeColor }: ArtistContactButton
           target="_blank"
           rel="noopener noreferrer"
           style={themeColor ? { backgroundColor: themeColor, color: '#000' } : {}}
-          className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all duration-300 shadow hover:opacity-90`}
+          className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all duration-300 shadow hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background`}
           title={method.label}
+          aria-label={`${method.label} - opens in new tab`}
         >
           <method.icon className="w-4 h-4" />
           <span className="text-sm font-medium">{method.label}</span>

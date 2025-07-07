@@ -6,6 +6,7 @@ import { AnimatedText } from "@/components/ui/AnimatedText";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import ArtworkCarousel from "@/components/home/ArtworkCarousel";
+import ArticlesSection from "@/components/home/ArticlesSection";
 
 export default function HomePageClient({ featuredArtists, artworks }: { featuredArtists: Artist[]; artworks?: any[] }) {
   return (
@@ -39,39 +40,54 @@ export default function HomePageClient({ featuredArtists, artworks }: { featured
 
       {/* === Featured Work Carousel === */}
       {artworks && artworks.length > 0 && (
-        <section className="py-24 bg-card border-y border-border">
+        <section className="py-24" style={{ background: '#23272a' }}>
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-               <h2 className="text-4xl font-serif font-bold text-foreground">Featured Work</h2>
-               <p className="text-muted mt-2">A glimpse into the extraordinary.</p>
+               <h2 className="text-4xl font-serif font-bold text-white">Featured Work</h2>
+               <p className="text-white/70 mt-2">A glimpse into the extraordinary.</p>
             </div>
             <ArtworkCarousel artworks={artworks} />
           </div>
         </section>
       )}
 
-      {/* === Featured Artists Section (High-Contrast Theme) === */}
-      <section className="py-12 bg-primary">
+      {/* === Featured Artists Section (Premium Carousel) === */}
+      <section className="py-16 bg-gradient-to-b from-[#18181b] to-[#101014]">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-black mb-6 text-center text-black">Featured Artists</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredArtists.map((artist) => (
-              <div key={artist.id} className="bg-green-400/10 rounded-xl shadow-lg overflow-hidden flex flex-col cursor-pointer hover:cursor-none">
-                <div className="relative w-full aspect-square p-3">
-                  <img 
-                    src={artist.fields.ProfileImage?.[0]?.url || '/placeholder-avatar.png'} 
-                    alt={artist.fields.Name}
-                    className="w-full h-full object-cover rounded-lg"
-                  />
+          <h2 className="text-4xl font-black mb-8 text-center text-white">Featured Artists</h2>
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-transparent -mx-4 px-4">
+            <div className="flex gap-8 md:gap-10">
+              {featuredArtists.map((artist) => (
+                <div key={artist.id} className="relative min-w-[320px] max-w-xs flex-shrink-0 group">
+                  <ArtistCard artist={artist} themeColor={artist.fields.ThemePrimaryColor} />
+                  <Link href={`/artists/${artist.id}`}>
+                    <button className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 text-white font-bold text-lg rounded-2xl z-10">
+                      View Profile
+                    </button>
+                  </Link>
                 </div>
-                <div className="flex-1 flex flex-col p-4">
-                  <h3 className="text-lg font-bold mb-2" style={{color: 'black'}}>{artist.fields.Name}</h3>
-                  <p className="text-sm flex-1" style={{color: 'black'}}>{artist.fields.Specialty}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="mt-2 text-xs text-white/40 text-center select-none">Scroll to see more</div>
           </div>
         </div>
+        {/* SVG Divider */}
+        <div className="w-full overflow-hidden -mb-1">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-12">
+            <path d="M0 0h1440v30c-480 40-960 40-1440 0V0z" fill="url(#gradient)" />
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#18181b" />
+                <stop offset="1" stopColor="#101014" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </section>
+
+      {/* === Articles Section (Bottom, Metallic Grey) === */}
+      <section style={{ background: '#23272a' }}>
+        <ArticlesSection />
       </section>
     </div>
   );
