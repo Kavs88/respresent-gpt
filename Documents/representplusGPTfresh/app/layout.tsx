@@ -1,14 +1,15 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { Inter, Lora } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
+import '../styles/lora-font.css'
 import Header from "../components/layout/Header"
 import Footer from "../components/layout/Footer"
 import { GlobalMotionWrapper } from '@/components/ui/GlobalMotionWrapper'
 import PageTransitionWrapper from '@/components/layout/PageTransitionWrapper'
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
+// Lora is now self-hosted via CSS
 
 export const metadata: Metadata = {
   title: {
@@ -76,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable}`}>
+    <html lang="en" className={`${inter.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
