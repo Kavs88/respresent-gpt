@@ -86,27 +86,25 @@ export default function HomePageClient({ featuredArtists, artworks }: HomePageCl
 
       {/* === Featured Artists Section (High-Contrast Theme) === */}
       <section className="py-6 xs:py-8 sm:py-12 lg:py-16 bg-primary">
-        <Container>
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-hidden">
           <div className="text-center mb-4 xs:mb-6 sm:mb-8">
             <RevealOnScroll delay={0.1}>
-              <h2 className={`${responsiveClasses.text.h1} font-black text-black tracking-tight`}>Featured Artists</h2>
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-black text-black tracking-tight">Featured Artists</h2>
             </RevealOnScroll>
             <RevealOnScroll delay={0.2}>
-              <p className={`${responsiveClasses.text.body} text-black/80 max-w-2xl mx-auto mt-2 xs:mt-3 sm:mt-4`}>
+              <p className="text-sm xs:text-base sm:text-lg lg:text-xl text-black/80 max-w-2xl mx-auto mt-2 xs:mt-3 sm:mt-4">
                 The visionaries shaping our creative landscape.
               </p>
             </RevealOnScroll>
           </div>
-          <div className={`grid ${responsiveClasses.grid.mobile} ${responsiveClasses.grid.tablet} ${responsiveClasses.grid.desktop} ${responsiveClasses.grid.large} ${responsiveClasses.spacing.lg} max-w-7xl mx-auto`}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
             {featuredArtists.map((artist) => (
-              <div key={artist.id} className="flex justify-center">
-                <div className="w-full max-w-sm">
-                  <ArtistCard artist={artist} themeColor={artist.fields.ThemePrimaryColor} />
-                </div>
+              <div key={artist.id} className="w-full flex justify-center">
+                <ArtistCard artist={artist} themeColor={artist.fields.ThemePrimaryColor} />
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* === Call to Action Section === */}

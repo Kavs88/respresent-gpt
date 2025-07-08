@@ -31,7 +31,7 @@ export default function AboutPage() {
       
       <div className="min-h-screen bg-background text-foreground">
         {/* Hero Section */}
-        <section className="relative pt-16 xs:pt-20 sm:pt-24 lg:pt-32 pb-8 xs:pb-12 sm:pb-16 lg:pb-20 overflow-hidden">
+        <section className="relative pt-16 xs:pt-20 sm:pt-24 lg:pt-32 pb-8 xs:pb-12 sm:pb-16 lg:pb-20 overflow-hidden bg-background">
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20">
             <div className="absolute inset-0 opacity-30" style={{
@@ -58,36 +58,52 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Mission Section */}
-        <section className="py-8 xs:py-12 sm:py-16 lg:py-20 px-3 xs:px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto">
-            <motion.div 
-              variants={fadeUp}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="text-center mb-8 xs:mb-12 sm:mb-16"
-            >
-              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 xs:mb-4 sm:mb-6">
-                Our Mission
-              </h2>
-              <div className="bg-card/50 backdrop-blur-sm rounded-3xl p-4 xs:p-6 sm:p-8 lg:p-12 border border-border/50 shadow-xl">
-                <p className="text-sm xs:text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground mb-3 xs:mb-4 sm:mb-6">
-                  We believe that exceptional talent deserves exceptional representation. Our mission is to discover, 
-                  showcase, and connect the world's most innovative creative professionals with the opportunities, 
-                  collaborations, and audiences that will amplify their impact and accelerate their success.
-                </p>
-                <p className="text-sm xs:text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
-                  Through our curated platform, we're building a global ecosystem where artists, designers, 
-                  creators, and visionaries can thrive, collaborate, and reach their full potential.
-                </p>
-              </div>
-            </motion.div>
+        {/* Wavy SVG Divider */}
+        <div className="relative z-10 -mt-8 sm:-mt-12 lg:-mt-16">
+          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-12 sm:h-16 lg:h-24">
+            <path d="M0 0h1440v60c-120 40-360 60-720 60S120 100 0 60V0z" fill="#00FF9D" fillOpacity="0.08" />
+          </svg>
+        </div>
+
+        {/* Mission Section with Animated Image */}
+        <section className="py-8 xs:py-12 sm:py-16 lg:py-20 px-3 xs:px-4 sm:px-6 relative overflow-visible bg-muted/10">
+          <div className="max-w-4xl mx-auto relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
+            {/* Exhibition Image left */}
+            <img
+              src="/exhibition.jpg"
+              alt="Modern art exhibition"
+              className="w-full max-w-xs md:max-w-sm lg:max-w-md rounded-3xl shadow-2xl object-cover object-center mb-6 md:mb-0"
+              style={{ aspectRatio: '4/5' }}
+            />
+            <div className="flex-1">
+              <motion.div 
+                variants={fadeUp}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                className="text-center md:text-left mb-8 xs:mb-12 sm:mb-16 md:mb-0"
+              >
+                <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 xs:mb-4 sm:mb-6">
+                  Our Mission
+                </h2>
+                <div className="bg-card/50 backdrop-blur-sm rounded-3xl p-4 xs:p-6 sm:p-8 lg:p-12 border border-border/50 shadow-xl">
+                  <p className="text-sm xs:text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground mb-3 xs:mb-4 sm:mb-6">
+                    We believe that exceptional talent deserves exceptional representation. Our mission is to discover, 
+                    showcase, and connect the world's most innovative creative professionals with the opportunities, 
+                    collaborations, and audiences that will amplify their impact and accelerate their success.
+                  </p>
+                  <p className="text-sm xs:text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
+                    Through our curated platform, we're building a global ecosystem where artists, designers, 
+                    creators, and visionaries can thrive, collaborate, and reach their full potential.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Values Section */}
-        <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-muted/10">
+        <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-background">
           <div className="max-w-6xl mx-auto">
             <motion.div 
               variants={fadeUp}
@@ -250,7 +266,8 @@ export default function AboutPage() {
               <div className="text-center mt-12">
                 <a 
                   href="/contact" 
-                  className="inline-flex items-center gap-3 bg-primary text-black font-bold px-8 py-4 rounded-full hover:opacity-90 transition-opacity"
+                  className="inline-flex items-center gap-3 font-bold px-8 py-4 rounded-full hover:opacity-90 transition-opacity"
+                  style={{ backgroundColor: '#17624A', color: '#fff' }}
                 >
                   Get in Touch
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
