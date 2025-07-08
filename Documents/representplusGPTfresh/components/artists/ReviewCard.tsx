@@ -36,7 +36,7 @@ export default function ReviewCard({
         y: -5,
         transition: { duration: 0.3, ease: "easeOut" }
       }}
-      className="group relative overflow-hidden rounded-2xl p-8 backdrop-blur-xl"
+      className="group relative overflow-hidden rounded-2xl p-4 sm:p-6 lg:p-8 backdrop-blur-xl"
       style={{
         backgroundColor: themeBackgroundColor ? `${themeBackgroundColor}15` : 'rgba(14, 14, 14, 0.15)',
         border: `1px solid ${themePrimaryColor ? `${themePrimaryColor}20` : 'rgba(0, 255, 157, 0.2)'}`,
@@ -55,22 +55,22 @@ export default function ReviewCard({
       {/* Content */}
       <div className="relative z-10">
         {/* Header */}
-        <div className="flex items-start justify-between mb-6">
-          <div className="flex-1 space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-4 sm:mb-6 gap-3 sm:gap-0">
+          <div className="flex-1 space-y-2 sm:space-y-3">
             {/* Featured badge */}
             {review.fields.Featured && (
               <motion.span 
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-full tracking-wide"
+                className="inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-semibold rounded-full tracking-wide"
                 style={{
                   backgroundColor: themePrimaryColor ? `${themePrimaryColor}25` : 'rgba(0, 255, 157, 0.25)',
                   color: themePrimaryColor,
                   border: `1px solid ${themePrimaryColor}40`
                 }}
               >
-                <span className="w-1.5 h-1.5 rounded-full mr-2" style={{ backgroundColor: themePrimaryColor }} />
+                <span className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full mr-1.5 sm:mr-2" style={{ backgroundColor: themePrimaryColor }} />
                 Featured Review
               </motion.span>
             )}
@@ -81,7 +81,7 @@ export default function ReviewCard({
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-lg font-semibold tracking-tight"
+                className="text-base sm:text-lg font-semibold tracking-tight"
                 style={{ color: themePrimaryColor }}
               >
                 {review.fields["Client Name"].trim()}
@@ -94,7 +94,7 @@ export default function ReviewCard({
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-sm font-medium opacity-80 tracking-wide"
+                className="text-xs sm:text-sm font-medium opacity-80 tracking-wide"
               >
                 {review.fields["Project Type"]}
               </motion.p>
@@ -106,7 +106,7 @@ export default function ReviewCard({
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-xs font-medium opacity-60 tracking-wide whitespace-nowrap"
+            className="text-xs font-medium opacity-60 tracking-wide whitespace-nowrap self-start sm:self-auto"
           >
             {formatDate(review.fields.Date)}
           </motion.span>
@@ -121,13 +121,13 @@ export default function ReviewCard({
         >
           {/* Quote mark */}
           <span 
-            className="absolute -top-2 -left-2 text-4xl font-serif opacity-20"
+            className="absolute -top-1 sm:-top-2 -left-1 sm:-left-2 text-2xl sm:text-3xl lg:text-4xl font-serif opacity-20"
             style={{ color: themePrimaryColor }}
           >
             "
           </span>
           
-          <p className="text-base leading-relaxed font-light tracking-wide pl-6">
+          <p className="text-sm sm:text-base leading-relaxed font-light tracking-wide pl-4 sm:pl-6">
             {review.fields["Review Text"]}
           </p>
         </motion.blockquote>

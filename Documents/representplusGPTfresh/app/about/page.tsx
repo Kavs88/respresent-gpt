@@ -31,7 +31,7 @@ export default function AboutPage() {
       
       <div className="min-h-screen bg-background text-foreground">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 overflow-hidden">
+        <section className="relative pt-16 xs:pt-20 sm:pt-24 lg:pt-32 pb-8 xs:pb-12 sm:pb-16 lg:pb-20 overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20">
             <div className="absolute inset-0 opacity-30" style={{
@@ -43,14 +43,14 @@ export default function AboutPage() {
             }} />
           </div>
           
-          <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          <div className="relative z-10 max-w-4xl mx-auto px-3 xs:px-4 sm:px-6 text-center">
             <RevealOnScroll delay={0}>
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6">
+              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white mb-3 xs:mb-4 sm:mb-6">
                 About <span className="text-primary">Represent+</span>
               </h1>
             </RevealOnScroll>
             <RevealOnScroll delay={0.2}>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-3 xs:px-4 sm:px-6">
                 We're the premier platform connecting exceptional creative talent with opportunities worldwide. 
                 Bridging the gap between visionary artists and the global stage they deserve.
               </p>
@@ -59,25 +59,25 @@ export default function AboutPage() {
         </section>
 
         {/* Mission Section */}
-        <section className="py-20 px-4">
+        <section className="py-8 xs:py-12 sm:py-16 lg:py-20 px-3 xs:px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div 
               variants={fadeUp}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-8 xs:mb-12 sm:mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 xs:mb-4 sm:mb-6">
                 Our Mission
               </h2>
-              <div className="bg-card/50 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-border/50 shadow-xl">
-                <p className="text-lg md:text-xl leading-relaxed text-muted-foreground mb-6">
+              <div className="bg-card/50 backdrop-blur-sm rounded-3xl p-4 xs:p-6 sm:p-8 lg:p-12 border border-border/50 shadow-xl">
+                <p className="text-sm xs:text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground mb-3 xs:mb-4 sm:mb-6">
                   We believe that exceptional talent deserves exceptional representation. Our mission is to discover, 
                   showcase, and connect the world's most innovative creative professionals with the opportunities, 
                   collaborations, and audiences that will amplify their impact and accelerate their success.
                 </p>
-                <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
+                <p className="text-sm xs:text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
                   Through our curated platform, we're building a global ecosystem where artists, designers, 
                   creators, and visionaries can thrive, collaborate, and reach their full potential.
                 </p>
@@ -87,19 +87,19 @@ export default function AboutPage() {
         </section>
 
         {/* Values Section */}
-        <section className="py-20 px-4 bg-muted/10">
+        <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-muted/10">
           <div className="max-w-6xl mx-auto">
             <motion.div 
               variants={fadeUp}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-12 sm:mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
                 Our Values
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
                 The principles that guide everything we do
               </p>
             </motion.div>
@@ -109,19 +109,19 @@ export default function AboutPage() {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"
             >
               <motion.div 
                 variants={fadeUp}
-                className="group bg-card/50 backdrop-blur-sm rounded-2xl p-8 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-xl"
+                className="group bg-card/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-xl"
               >
-                <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                  <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                  <svg className="w-6 h-6 sm:w-8 sm:h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4 text-center">Artistic Excellence</h3>
-                <p className="text-muted-foreground text-center leading-relaxed">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 text-center">Artistic Excellence</h3>
+                <p className="text-sm sm:text-base text-muted-foreground text-center leading-relaxed">
                   We champion only the highest caliber of creative work, ensuring every artist we represent 
                   meets our rigorous standards of innovation and quality.
                 </p>

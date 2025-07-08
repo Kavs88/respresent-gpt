@@ -8,6 +8,35 @@
 }
 
 html { cursor: none; }
+
+/* Mobile-specific improvements */
+@media (max-width: 374px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Ensure touch targets are large enough */
+button, a, input, textarea, select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Prevent zoom on input focus on iOS */
+input, textarea, select {
+  font-size: 16px !important;
+}
+
+/* Improve touch scrolling */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better focus indicators for accessibility */
+button:focus, a:focus, input:focus, textarea:focus, select:focus {
+  outline: 2px solid rgb(0, 255, 157);
+  outline-offset: 2px;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

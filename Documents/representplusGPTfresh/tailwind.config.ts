@@ -22,6 +22,14 @@ const config: Config = {
       border: 'rgb(var(--border) / <alpha-value>)',
     },
     extend: {
+      screens: {
+        'xs': '375px',
+        'xs-max': {'max': '374px'},
+        'sm-max': {'max': '639px'},
+        'md-max': {'max': '767px'},
+        'lg-max': {'max': '1023px'},
+        'xl-max': {'max': '1279px'},
+      },
       colors: {
         'agency-dark': '#121212',
         'agency-panel': '#1E1E1E',
@@ -29,7 +37,7 @@ const config: Config = {
         'agency-light': '#EAEAEA',
         'agency-gray': '#A0A0A2',
       },
-    }, // We leave extend empty for now
+    },
   },
   plugins: [],
 }

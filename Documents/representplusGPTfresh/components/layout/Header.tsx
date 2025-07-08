@@ -26,11 +26,11 @@ export default function Header() {
       className={`w-full sticky top-0 left-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border transition-shadow duration-300 ${scrolled ? 'shadow-lg' : ''}`}
       role="banner"
     >
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div className="max-w-6xl mx-auto flex items-center justify-between px-3 xs:px-4 sm:px-6 py-2 xs:py-3 sm:py-4">
         <Logo />
         {/* Desktop nav */}
         <nav 
-          className="hidden md:flex gap-8 text-base font-medium items-center"
+          className="hidden lg:flex gap-6 xl:gap-8 text-sm xl:text-base font-medium items-center"
           id="main-navigation"
           role="navigation"
           aria-label="Main navigation"
@@ -39,14 +39,14 @@ export default function Header() {
             <LinkWithCursor 
               key={link.href} 
               href={link.href} 
-              className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded"
+              className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded px-2 py-1"
             >
               {link.label}
             </LinkWithCursor>
           ))}
           <LinkWithCursor 
             href="/contact" 
-            className="font-bold px-5 py-2 rounded-full hover:opacity-90 transition-opacity ml-4 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            className="font-bold px-4 xl:px-5 py-2 rounded-full hover:opacity-90 transition-opacity ml-4 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             style={{ backgroundColor: '#17624A', color: '#fff' }}
           >
             Let's Talk
@@ -54,7 +54,7 @@ export default function Header() {
         </nav>
         {/* Hamburger for mobile */}
         <button
-          className="md:hidden flex items-center justify-center w-10 h-10 rounded hover:bg-white/10 transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+          className="lg:hidden flex items-center justify-center w-12 h-12 xs:w-10 xs:h-10 rounded hover:bg-white/10 transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
@@ -65,37 +65,45 @@ export default function Header() {
           <span className="block w-6 h-0.5 bg-white transition-transform" style={{ transform: isMenuOpen ? 'rotate(-45deg) translate(2px, -2px)' : 'none' }} />
         </button>
       </div>
-      {/* Mobile overlay menu */}
+      {/* Mobile dropdown menu */}
       {isMenuOpen && (
-        <div 
-          className="fixed inset-0 z-40 bg-background/95 backdrop-blur-sm flex flex-col items-center justify-center md:hidden"
-          id="mobile-menu"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation menu"
-        >
-          <button
-            className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded hover:bg-white/10 transition focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
-            aria-label="Close menu"
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden z-30"
             onClick={() => setIsMenuOpen(false)}
+            aria-hidden="true"
+          />
+          {/* Dropdown */}
+          <div 
+            className="absolute top-full right-0 w-64 xs:w-72 bg-background/95 backdrop-blur-sm border border-border shadow-2xl rounded-b-2xl lg:hidden z-40"
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
           >
-            <span className="block w-6 h-0.5 bg-white rotate-45 absolute" style={{ top: '50%' }} />
-            <span className="block w-6 h-0.5 bg-white -rotate-45 absolute" style={{ top: '50%' }} />
-          </button>
-          <nav className="flex flex-col gap-8 text-2xl font-semibold" role="navigation" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
-              <LinkWithCursor 
-                key={link.href} 
-                href={link.href} 
-                className="hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded px-4 py-2" 
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.label}
-              </LinkWithCursor>
-            ))}
+          <nav className="flex flex-col p-4" role="navigation" aria-label="Mobile navigation">
+            {/* Navigation Links */}
+            <div className="space-y-2 mb-4">
+              {navLinks.map((link) => (
+                <LinkWithCursor 
+                  key={link.href} 
+                  href={link.href} 
+                  className="block w-full text-left px-4 py-3 rounded-lg hover:bg-white/10 hover:text-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background min-h-[44px] flex items-center justify-center" 
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </LinkWithCursor>
+              ))}
+            </div>
+            
+            {/* Divider */}
+            <div className="border-t border-border my-2"></div>
+            
+            {/* CTA Button */}
             <LinkWithCursor 
               href="/contact" 
-              className="font-bold px-6 py-3 rounded-full hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+              className="w-full font-bold px-4 py-3 rounded-lg hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background min-h-[44px] flex items-center justify-center text-center"
               style={{ backgroundColor: '#17624A', color: '#fff' }}
               onClick={() => setIsMenuOpen(false)}
             >
@@ -103,6 +111,7 @@ export default function Header() {
             </LinkWithCursor>
           </nav>
         </div>
+        </>
       )}
     </header>
   );
