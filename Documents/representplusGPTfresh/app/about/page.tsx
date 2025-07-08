@@ -46,13 +46,12 @@ export default function AboutPage() {
           <div className="relative z-10 max-w-4xl mx-auto px-3 xs:px-4 sm:px-6 text-center">
             <RevealOnScroll delay={0}>
               <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white mb-3 xs:mb-4 sm:mb-6">
-                About <span className="text-primary">Represent+</span>
+                Our Story at <span className="font-bold" style={{ color: '#00FF9D' }}>Represent+</span>
               </h1>
             </RevealOnScroll>
             <RevealOnScroll delay={0.2}>
               <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-3 xs:px-4 sm:px-6">
-                We're the premier platform connecting exceptional creative talent with opportunities worldwide. 
-                Bridging the gap between visionary artists and the global stage they deserve.
+                Where creative visionaries and bold opportunities meet. Represent+ is the platform for artists and agencies who believe in the power of originality, connection, and craft.
               </p>
             </RevealOnScroll>
           </div>
@@ -69,32 +68,31 @@ export default function AboutPage() {
         <section className="py-8 xs:py-12 sm:py-16 lg:py-20 px-3 xs:px-4 sm:px-6 relative overflow-visible bg-muted/10">
           <div className="max-w-4xl mx-auto relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
             {/* Exhibition Image left */}
-            <img
-              src="/exhibition.jpg"
-              alt="Modern art exhibition"
-              className="w-full max-w-xs md:max-w-sm lg:max-w-md rounded-3xl shadow-2xl object-cover object-center mb-6 md:mb-0"
-              style={{ aspectRatio: '4/5' }}
-            />
-            <div className="flex-1">
+            <div className="w-full max-w-xs md:max-w-sm lg:max-w-md h-full flex items-center justify-center md:items-stretch md:justify-start">
+              <img
+                src="/exhibition.jpg"
+                alt="Modern art exhibition"
+                className="h-full max-h-[420px] w-auto rounded-3xl shadow-2xl object-cover object-center mb-6 md:mb-0"
+                style={{ minHeight: '180px' }}
+              />
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center md:items-center h-full">
               <motion.div 
                 variants={fadeUp}
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true }}
-                className="text-center md:text-left mb-8 xs:mb-12 sm:mb-16 md:mb-0"
+                className="text-center md:text-center mb-8 xs:mb-12 sm:mb-16 md:mb-0 flex flex-col justify-center h-full"
               >
                 <h2 className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 xs:mb-4 sm:mb-6">
                   Our Mission
                 </h2>
                 <div className="bg-card/50 backdrop-blur-sm rounded-3xl p-4 xs:p-6 sm:p-8 lg:p-12 border border-border/50 shadow-xl">
                   <p className="text-sm xs:text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground mb-3 xs:mb-4 sm:mb-6">
-                    We believe that exceptional talent deserves exceptional representation. Our mission is to discover, 
-                    showcase, and connect the world's most innovative creative professionals with the opportunities, 
-                    collaborations, and audiences that will amplify their impact and accelerate their success.
+                    We champion creative excellence. Our mission is to elevate artists, foster meaningful collaborations, and connect talent with those who value vision and authenticity.
                   </p>
                   <p className="text-sm xs:text-base sm:text-lg md:text-xl leading-relaxed text-muted-foreground">
-                    Through our curated platform, we're building a global ecosystem where artists, designers, 
-                    creators, and visionaries can thrive, collaborate, and reach their full potential.
+                    <span className="font-bold" style={{ color: '#00FF9D' }}>Represent+</span> is a curated ecosystem where artists, designers, and creative professionals thrive, inspire, and shape culture together.
                   </p>
                 </div>
               </motion.div>
@@ -116,7 +114,7 @@ export default function AboutPage() {
                 Our Values
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-                The principles that guide everything we do
+                The principles that define our creative community
               </p>
             </motion.div>
             
@@ -138,8 +136,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 text-center">Artistic Excellence</h3>
                 <p className="text-sm sm:text-base text-muted-foreground text-center leading-relaxed">
-                  We champion only the highest caliber of creative work, ensuring every artist we represent 
-                  meets our rigorous standards of innovation and quality.
+                  We represent only the most original and innovative talent, setting a new standard for creative achievement.
                 </p>
               </motion.div>
               
@@ -154,8 +151,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4 text-center">Authentic Partnerships</h3>
                 <p className="text-muted-foreground text-center leading-relaxed">
-                  We build genuine, long-term relationships with our artists, providing personalized support 
-                  and strategic guidance throughout their creative journey.
+                  We build lasting, supportive relationships with our artists—offering guidance, advocacy, and a platform for growth.
                 </p>
               </motion.div>
               
@@ -170,8 +166,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4 text-center">Global Impact</h3>
                 <p className="text-muted-foreground text-center leading-relaxed">
-                  We connect talent with opportunities across borders, cultures, and industries, 
-                  creating a truly global creative community.
+                  We connect creative visionaries with opportunities worldwide, amplifying voices and shaping culture across borders.
                 </p>
               </motion.div>
             </motion.div>
@@ -189,10 +184,10 @@ export default function AboutPage() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                How to Connect
+                Connect With <span className="font-bold" style={{ color: '#00FF9D' }}>Represent+</span>
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Whether you're an artist or a partner, we're here to help you succeed
+              <p className="text-lg md:text-xl text-muted mb-12 max-w-2xl mx-auto leading-relaxed">
+                Whether you’re an artist, agency, or creative partner, we’re here to help you make your mark. Let’s start a conversation about your next chapter.
               </p>
             </motion.div>
             
