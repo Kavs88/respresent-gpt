@@ -4,6 +4,19 @@ export interface Attachment {
   filename: string;
 }
 
+export interface Review {
+  id: string;
+  fields: {
+    Artist: string[]; // Array of artist IDs
+    "Client Name"?: string;
+    "Review Text": string;
+    "Project Type"?: string;
+    Date: string;
+    Featured?: boolean;
+    Approved?: boolean;
+  };
+}
+
 export interface Artist {
   id: string;
   fields: {

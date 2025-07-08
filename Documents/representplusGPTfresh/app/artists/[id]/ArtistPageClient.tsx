@@ -4,11 +4,13 @@ import Image from "next/image";
 import { ArtworkCarousel } from "@/components/artists/ArtworkCarousel";
 import PlatformContactButtons from "@/components/ui/PlatformContactButtons";
 import ContactModal from "@/components/ui/ContactModal";
-import { Artist } from "@/types/artist";
+import ReviewCard from "@/components/artists/ReviewCard";
+import { Artist, Review } from "@/types/artist";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-export default function ArtistPageClient({ artist }: { artist: Artist }) {
+export default function ArtistPageClient({ artist, reviews }: { artist: Artist; reviews: Review[] }) {
+  console.log(`ArtistPageClient: Received ${reviews.length} reviews for ${artist.fields.Name}`);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   
   // Set up the dynamic theme styles with fallbacks
@@ -168,30 +170,92 @@ export default function ArtistPageClient({ artist }: { artist: Artist }) {
                 </section>
               )}
 
-              {/* Artist Stats */}
-              <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="backdrop-blur-sm rounded-xl p-6 text-center" style={{
-                  backgroundColor: artist.fields.ThemeBackgroundColor ? `${artist.fields.ThemeBackgroundColor}20` : 'rgba(26, 26, 26, 0.5)',
-                  border: `1px solid ${artist.fields.ThemePrimaryColor ? `${artist.fields.ThemePrimaryColor}30` : 'rgba(64, 64, 64, 0.5)'}`
-                }}>
-                  <div className="text-3xl font-bold mb-2" style={{ color: artist.fields.ThemePrimaryColor || '#00ff9d' }}>5+</div>
-                  <div style={{ color: artist.fields.ThemeTextColor ? `${artist.fields.ThemeTextColor}80` : '#888888' }}>Years Experience</div>
-                </div>
-                <div className="backdrop-blur-sm rounded-xl p-6 text-center" style={{
-                  backgroundColor: artist.fields.ThemeBackgroundColor ? `${artist.fields.ThemeBackgroundColor}20` : 'rgba(26, 26, 26, 0.5)',
-                  border: `1px solid ${artist.fields.ThemePrimaryColor ? `${artist.fields.ThemePrimaryColor}30` : 'rgba(64, 64, 64, 0.5)'}`
-                }}>
-                  <div className="text-3xl font-bold mb-2" style={{ color: artist.fields.ThemePrimaryColor || '#00ff9d' }}>50+</div>
-                  <div style={{ color: artist.fields.ThemeTextColor ? `${artist.fields.ThemeTextColor}80` : '#888888' }}>Projects Completed</div>
-                </div>
-                <div className="backdrop-blur-sm rounded-xl p-6 text-center" style={{
-                  backgroundColor: artist.fields.ThemeBackgroundColor ? `${artist.fields.ThemeBackgroundColor}20` : 'rgba(26, 26, 26, 0.5)',
-                  border: `1px solid ${artist.fields.ThemePrimaryColor ? `${artist.fields.ThemePrimaryColor}30` : 'rgba(64, 64, 64, 0.5)'}`
-                }}>
-                  <div className="text-3xl font-bold mb-2" style={{ color: artist.fields.ThemePrimaryColor || '#00ff9d' }}>100%</div>
-                  <div style={{ color: artist.fields.ThemeTextColor ? `${artist.fields.ThemeTextColor}80` : '#888888' }}>Client Satisfaction</div>
-                </div>
-              </section>
+              {/* Reviews Section */}
+              {reviews.length > 0 && (
+                <motion.section 
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="relative overflow-hidden"
+                >
+                  {/* Background gradient */}
+                  <div 
+                    className="absolute inset-0 rounded-3xl opacity-60"
+                    style={{
+                      background: `linear-gradient(135deg, ${artist.fields.ThemePrimaryColor ? `${artist.fields.ThemePrimaryColor}08` : 'rgba(0, 255, 157, 0.08)'} 0%, ${artist.fields.ThemeBackgroundColor ? `${artist.fields.ThemeBackgroundColor}15` : 'rgba(14, 14, 14, 0.15)'} 50%, ${artist.fields.ThemePrimaryColor ? `${artist.fields.ThemePrimaryColor}05` : 'rgba(0, 255, 157, 0.05)'} 100%)`
+                    }}
+                  />
+                  
+                  {/* Content */}
+                  <div className="relative z-10 backdrop-blur-xl rounded-3xl p-10 border" style={{
+                    borderColor: artist.fields.ThemePrimaryColor ? `${artist.fields.ThemePrimaryColor}20` : 'rgba(0, 255, 157, 0.2)',
+                    boxShadow: `0 20px 60px ${artist.fields.ThemePrimaryColor ? `${artist.fields.ThemePrimaryColor}08` : 'rgba(0, 255, 157, 0.08)'}`
+                  }}>
+                    <div className="text-center mb-12">
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4"
+                        style={{
+                          backgroundColor: artist.fields.ThemePrimaryColor ? `${artist.fields.ThemePrimaryColor}20` : 'rgba(0, 255, 157, 0.2)',
+                          color: artist.fields.ThemePrimaryColor || '#00ff9d'
+                        }}
+                      >
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: artist.fields.ThemePrimaryColor || '#00ff9d' }} />
+                        Client Testimonials
+                      </motion.div>
+                      
+                      <motion.h2 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        className="text-4xl font-serif font-bold mb-4"
+                        style={{ color: artist.fields.ThemePrimaryColor || '#00ff9d' }}
+                      >
+                        Client Reviews
+                      </motion.h2>
+                      
+                      <motion.p 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                        className="text-lg font-light tracking-wide"
+                        style={{ color: artist.fields.ThemeTextColor ? `${artist.fields.ThemeTextColor}80` : '#888888' }}
+                      >
+                        What clients say about working with {artist.fields.Name}
+                      </motion.p>
+                    </div>
+                    
+                    <motion.div 
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.6 }}
+                      className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+                    >
+                      {reviews.map((review, index) => (
+                        <motion.div
+                          key={review.id}
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ 
+                            duration: 0.6, 
+                            delay: 0.7 + (index * 0.1),
+                            ease: [0.25, 0.46, 0.45, 0.94]
+                          }}
+                        >
+                          <ReviewCard
+                            review={review}
+                            themePrimaryColor={artist.fields.ThemePrimaryColor}
+                            themeBackgroundColor={artist.fields.ThemeBackgroundColor}
+                            themeTextColor={artist.fields.ThemeTextColor}
+                          />
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </div>
+                </motion.section>
+              )}
 
               {/* Contact Section */}
               <section className="backdrop-blur-sm rounded-2xl p-8 text-center" style={{

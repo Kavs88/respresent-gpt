@@ -2,6 +2,8 @@ import { getArtists, getAllTags } from "@/lib/airtable";
 import ArtistsPageClient from "./ArtistsPageClient";
 import SEOHead from "@/components/ui/SEOHead";
 
+export const revalidate = 300; // Cache for 5 minutes
+
 export default async function ArtistsPage() {
   // Fetch all data in parallel for optimal performance
   const [artists, allTags] = await Promise.all([

@@ -4,6 +4,8 @@ import { Artist, Attachment } from '@/types/artist';
 import ArticlesSection from '@/components/home/ArticlesSection';
 import SEOHead from "@/components/ui/SEOHead";
 
+export const revalidate = 300; // Cache for 5 minutes
+
 export default async function Home() {
   const featuredArtists: Artist[] = await getArtists({ featuredOnly: true });
   const allArtworks: Attachment[] = featuredArtists.flatMap(
