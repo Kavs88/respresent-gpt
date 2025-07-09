@@ -31,7 +31,7 @@ export default function AboutPage() {
       
       <div className="min-h-screen bg-background text-foreground">
         {/* Hero Section */}
-        <section className="relative pt-16 xs:pt-20 sm:pt-24 lg:pt-32 pb-8 xs:pb-12 sm:pb-16 lg:pb-20 overflow-hidden bg-background">
+        <section className="relative pt-8 xs:pt-10 sm:pt-12 lg:pt-16 pb-4 xs:pb-6 sm:pb-8 lg:pb-10 overflow-hidden bg-background">
           {/* Background Pattern */}
           <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-muted/20">
             <div className="absolute inset-0 opacity-30" style={{
@@ -45,12 +45,12 @@ export default function AboutPage() {
           
           <div className="relative z-10 max-w-4xl mx-auto px-3 xs:px-4 sm:px-6 text-center">
             <RevealOnScroll delay={0}>
-              <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white mb-3 xs:mb-4 sm:mb-6">
+              <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight text-white mb-2 xs:mb-3 sm:mb-4">
                 Our Story at <span className="font-bold" style={{ color: '#00FF9D' }}>Represent+</span>
               </h1>
             </RevealOnScroll>
             <RevealOnScroll delay={0.2}>
-              <p className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-3 xs:px-4 sm:px-6">
+              <p className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-3 xs:px-4 sm:px-6">
                 Where creative visionaries and bold opportunities meet. Represent+ is the platform for artists and agencies who believe in the power of originality, connection, and craft.
               </p>
             </RevealOnScroll>
